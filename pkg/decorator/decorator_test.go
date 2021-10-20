@@ -28,3 +28,6 @@ func Test_howToUseDecorator(t *testing.T) {
 func AddNums(a int, b int) int {
 	return a + b
 }
+
+// here's what the same decorator pattern looks like in C#
+// https://dotnetfiddle.net/9bRx4e

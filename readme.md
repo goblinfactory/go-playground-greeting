@@ -55,16 +55,13 @@ Semi curated list of spike code that I suspect I will need quick access to.
 
     -   [async spike, download files and similar to Task.WaitAll](pkg/bloggy/spikeasync.go)
 
--   functional coding
-
-    -   [decorator, 3 lines](pkg/decorator/decorator_test.go)
-
 -   linq
 
     -   [no linq](pkg/nolinq/nolinq.og)
 
 -   software patterns
 
+    -   [decorator, 3 lines](pkg/decorator/decorator_test.go) - [same code in C# jsfiddle](https://dotnetfiddle.net/9bRx4e)
     -   [circuit breaker example from 'cloud native go'](pkg/bloggy/breaker/breaker.go)
     -   [sample quote api using rate limiter return 429 if requests too fast](pkg/bloggy/quoteapi/quoteapi.go)
 
