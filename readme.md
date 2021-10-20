@@ -13,12 +13,12 @@ Collection of small simple experiments in different go language topics. Note, th
 
 -   channels
 
-    -   [simple signal channels](pkg/muxyidiomatic/muxyidiomatic-signals.go)
+    -   [simple signal channels](pkg/muxyidiomatic/muxyidiomaticsignals.go)
     -   [quote stream (stream of quotes pushed to a channel)](pkg/bloggy/quotestream/quotestream.go)
-    -   [signal channels together with waitgroup](pkg/muxyidiomatic/muxyidiomatic-waitgroup.go)
+    -   [signal channels together with waitgroup](pkg/muxyidiomatic/muxyidiomaticwaitgroup.go)
 
-    -   [channels for service status](pkg/channels/channels-for-service-status.go)
-    -   [magic numbers in channels](pkg/channels/magic-number-channel.go)
+    -   [channels for service status](pkg/channels/servicestatuschannels.go)
+    -   [magic numbers in channels](pkg/channels/magicnumberchannel.go)
 
 -   waitgroup
 
@@ -45,7 +45,7 @@ Collection of small simple experiments in different go language topics. Note, th
 -   error handling
 
     -   [typical error handling](pkg/errorhandling/errorhandling.go)
-    -   [custom error objects](pkg/errorhandling/custom-errors.go)
+    -   [custom error objects](pkg/errorhandling/customerrors.go)
 
 -   dependency injection
 
