@@ -97,32 +97,33 @@ Vintage OR red
 -   software patterns
 
     -   [decorator, 3 lines](pkg/decorator/decorator_test.go)
+
         -   [same code in C# jsfiddle](https://dotnetfiddle.net/9bRx4e)
 
-```go
-type DecoratedAdd func(a int, b int) int
+            ```go
+                type DecoratedAdd func(a int, b int) int
 
-// this is such a quick way to implement a decorator
-func (f DecoratedAdd) Add(a int, b int) int {
-	fmt.Println("before")
-	defer fmt.Println("after")
-	r := f(a, b)
-	fmt.Println("result", r)
-	return r
-}
+                // this is such a quick way to implement a decorator
+                func (f DecoratedAdd) Add(a int, b int) int {
+                    fmt.Println("before")
+                    defer fmt.Println("after")
+                    r := f(a, b)
+                    fmt.Println("result", r)
+                    return r
+                }
 
-func Test_howToUseDecorator(t *testing.T) {
-	ad := DecoratedAdd(AddNums)
-	r := ad.Add(1, 3)
-	if r != 4 {
-		t.Error("expected 4")
-	}
-}
+                func Test_howToUseDecorator(t *testing.T) {
+                    ad := DecoratedAdd(AddNums)
+                    r := ad.Add(1, 3)
+                    if r != 4 {
+                        t.Error("expected 4")
+                    }
+                }
 
-func AddNums(a int, b int) int {
-	return a + b
-}
-```
+                func AddNums(a int, b int) int {
+                    return a + b
+                }
+            ```
 
     -   [circuit breaker example from 'cloud native go'](pkg/bloggy/breaker/breaker.go)
     -   [sample quote api using rate limiter return 429 if requests too fast](pkg/bloggy/quoteapi/quoteapi.go)
