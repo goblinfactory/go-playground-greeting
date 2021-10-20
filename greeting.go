@@ -1,12 +1,9 @@
 package main
 
-import (
-	"github.com/goblinfactory/greeting/pkg/nolinq"
-)
+import "github.com/goblinfactory/greeting/pkg/errorhandling"
 
 func main() {
-	nolinq.Main()
-	//errorhandling.DemoCustomErrors()
+	errorhandling.DemoCustomErrors()
 	// errorhandling.Demo1()
 	// errorhandling.Demo2()
 	// //dependencyinjection.Main()

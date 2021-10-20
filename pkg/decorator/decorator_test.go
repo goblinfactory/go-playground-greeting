@@ -22,7 +22,6 @@ func Test_howToUseDecorator(t *testing.T) {
 	if r != 4 {
 		t.Error("expected 4")
 	}
-
 }
 
 func AddNums(a int, b int) int {
