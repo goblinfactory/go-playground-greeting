@@ -9,7 +9,7 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [structs and maps](pkg/structsandmaps/structsandmaps2.go)
     -   [no matrixes](pkg/arrs/matrix.go)
     -   [sorting](pkg/arrs/sorting.go)
-    -   [custom collections](pkg/customcollection/string-or-int-list.go)
+    -   [custom collections](pkg/customcollection/stringorintlist.go)
 
 -   channels
 
