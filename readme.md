@@ -55,7 +55,9 @@ Semi curated list of spike code that I suspect I will need quick access to.
 
     -   [async spike, download files and similar to Task.WaitAll](pkg/bloggy/spikeasync.go)
 
--
+-   functional coding
+
+    -   [decorator, 3 lines](pkg/decorator/decorator_test.go)
 
 -   linq
 
@@ -73,3 +75,4 @@ Random spike projects, to test to see what it might take to write something your
 -   currency, money and hand rolled decimal-like types
 
     -   [test account service](pkg/testaccoiuntservice/testaccountservice.go)
+    -   [money gpb, usd, zar](pkg/money/money.go)
