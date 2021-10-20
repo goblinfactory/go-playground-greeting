@@ -144,5 +144,5 @@ Random spike projects, to test to see what it might take to write something your
 
 -   currency, money and hand rolled decimal-like types
 
-    -   [test account service](pkg/testaccoiuntservice/testaccountservice.go)
+    -   [test account service](pkg/testaccountservice/testaccountservice.go)
     -   [money gpb, usd, zar](pkg/money/money.go)
