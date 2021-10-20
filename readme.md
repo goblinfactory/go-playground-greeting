@@ -57,7 +57,7 @@ Semi curated list of spike code that I suspect I will need quick access to.
 
 -   linq
 
-    -   [no linq](pkg/nolinq/nolinq.og)
+    -   [no linq](pkg/nolinq/nolinq.go)
 
 -   software patterns
 
