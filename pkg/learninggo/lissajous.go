@@ -1,5 +1,8 @@
 package learninggo
 
+// lissajous animated gif generator from Learning Go, An Idiomatic Approach...
+// plus small changes.
+
 import (
 	"image"
 	"image/color"

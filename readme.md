@@ -32,6 +32,16 @@ Collection of small simple experiments in different go language topics. Note, th
 
     -   [timing example](pkg/timing/timing.go)
 
+-   json
+
+    -   [anon structs and json](pkg/learninggo/anonstructsandjson.go)
+
+-   graphics
+
+    -   [Lissajous animated gif (from Learning Go book)](pkg/learninggo/lissajous.go)
+
+        ![](lisa1.gif)
+
 -   error handling
 
     -   [typical error handling](pkg/errorhandling/errorhandling.go)
