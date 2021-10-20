@@ -1,11 +1,14 @@
 package main
 
 import (
-	"github.com/goblinfactory/greeting/pkg/dependencyinjection"
+	"github.com/goblinfactory/greeting/pkg/errorhandling"
 )
 
 func main() {
-	dependencyinjection.Main()
+	errorhandling.DemoCustomErrors()
+	// errorhandling.Demo1()
+	// errorhandling.Demo2()
+	// //dependencyinjection.Main()
 	//customcollection.Demo()
 	//learninggo.TestEmbeddingAndComposition()
 	//book1section1.LissajousFromArgs(os.Args[1:])
