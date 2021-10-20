@@ -38,7 +38,7 @@ Collection of small simple experiments in different go language topics. Note, th
 
 -   graphics
 
-    -   [Lissajous animated gif (from Learning Go book)](pkg/learninggo/lissajous.go)
+    -   [Lissajous animated gif generator (from Learning Go book)](pkg/learninggo/lissajous.go)
 
         ![](lisa1.gif)
 
