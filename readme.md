@@ -4,6 +4,10 @@ Collection of small simple experiments in different go language topics. Note, th
 
 ### language basics
 
+-   enums
+
+    -   [example of consts enums and iota](pkg/erroraddress/erroraddress.go)
+
 -   structs, maps and arrays
 
     -   [structs and maps](pkg/structsandmaps/structsandmaps2.go)
@@ -45,7 +49,11 @@ Collection of small simple experiments in different go language topics. Note, th
 -   error handling
 
     -   [typical error handling](pkg/errorhandling/errorhandling.go)
-    -   [custom error objects](pkg/errorhandling/customerrors.go)
+    -   [custom error objects (dont do this)](pkg/errorhandling/customerrorswrong.go)
+        -   above example shows using a type switch with type assertion to access fields and methods of a custom error.
+        -   instead we are supposed to use `errors.As`
+    -   [wrapping errors](pkg/errorhandling/wrappingerrors.go)
+    -   [checking for any errors of a certain type using errors.As](pkg/errorhandling/errorsas.go)
 
 -   dependency injection
 

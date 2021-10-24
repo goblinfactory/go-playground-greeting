@@ -28,6 +28,11 @@ func loadItemHandleErrorsReportExtraErrorDetails(item string) {
 	r, err := LoadCatOrCar(item)
 	if err != nil {
 		fmt.Println(err)
+
+		// FAIL!
+		// mmm, p168 says "dont use a type assertion or a type switch" to access the fields and
+		// methods of a cstom error, instead use errors.As
+
 		le, ok := err.(LoadError)
 		if ok {
 			switch le.Status {

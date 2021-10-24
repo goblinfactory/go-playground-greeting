@@ -1,12 +1,14 @@
 package main
 
-import "github.com/goblinfactory/greeting/pkg/errorhandling"
+import (
+	"github.com/goblinfactory/greeting/pkg/errorhandling"
+)
 
 func main() {
-	errorhandling.DemoCustomErrors()
+	errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
 	// errorhandling.Demo1()
 	// errorhandling.Demo2()
-	// //dependencyinjection.Main()
+	//dependencyinjection.Main()
 	//customcollection.Demo()
 	//learninggo.TestEmbeddingAndComposition()
 	//book1section1.LissajousFromArgs(os.Args[1:])
