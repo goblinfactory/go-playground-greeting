@@ -24,6 +24,11 @@ func (m GBP) GreaterOrEqual(rhs GBP) bool {
 	return m.allDigits >= rhs.allDigits
 }
 
+// IsNegative ...
+func (m GBP) IsNegative() bool {
+	return m.allDigits <= 0
+}
+
 // GetMoney ...
 func (m GBP) GetMoney() Money {
 	return m.Money

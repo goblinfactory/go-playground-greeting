@@ -53,7 +53,7 @@ Collection of small simple experiments in different go language topics. Note, th
         -   above example shows using a type switch with type assertion to access fields and methods of a custom error.
         -   instead we are supposed to use `errors.As`
     -   [wrapping errors](pkg/errorhandling/wrappingerrors.go)
-    -   [checking for any errors of a certain type using errors.As](pkg/errorhandling/errorsas.go)
+    -   [wrapping errors with defer](pkg/errorhandling/wrappingerrorwithdefer.go)
 
 -   dependency injection
 
