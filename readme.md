@@ -15,8 +15,10 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [sorting](pkg/arrs/sorting.go)
     -   [custom collections](pkg/customcollection/stringorintlist.go)
 
--   channels
+-   channels and concurrency
 
+    -   [for select loop pattern](pkg/concurrencypatterns/forselectloop.go)
+        -   example showing how writing `done{}` to a blocking channel is a brilliantly simple way to signal to a goRoutine to finish, and block until that's done.
     -   [simple signal channels](pkg/muxyidiomatic/muxyidiomaticsignals.go)
     -   [quote stream (stream of quotes pushed to a channel)](pkg/bloggy/quotestream/quotestream.go)
     -   [signal channels together with waitgroup](pkg/muxyidiomatic/muxyidiomaticwaitgroup.go)
