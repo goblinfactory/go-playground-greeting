@@ -10,7 +10,6 @@ import (
 
 // DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType ...
 func DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType() {
-
 	e1 := someFunctionReturningWrappedErrorsWithoutAddressError()
 	// check e1 should return no errors "as" AddressError
 	var ae1 erroraddress.AddressError

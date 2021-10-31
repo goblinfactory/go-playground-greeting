@@ -1,11 +1,12 @@
 package main
 
 import (
-	"github.com/goblinfactory/greeting/pkg/errorhandling"
+	"github.com/goblinfactory/greeting/pkg/concurrencypatterns"
 )
 
 func main() {
-	errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
+	concurrencypatterns.DemoForSelectLoop()
+	//errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
 	// errorhandling.Demo1()
 	// errorhandling.Demo2()
 	//dependencyinjection.Main()

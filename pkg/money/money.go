@@ -14,6 +14,7 @@ type Money struct {
 	CurrencySymbol   string
 	formatShort      string
 	formatWide       string
+	formatString     string
 }
 
 // CurrencyNames ...
@@ -37,6 +38,7 @@ func new2DecimalFormatLeft(currencySymbol string, amount float64) Money {
 		currencySymbol,
 		currencySymbol + " %4d.%02d",
 		currencySymbol + " %11d.%02d",
+		currencySymbol + " %d.%02d",
 	}
 	return m
 }
@@ -58,6 +60,7 @@ func (m Money) Subtract(rhs Money) Money {
 
 // Clone ...
 func (m Money) Clone(allDigits int64) Money {
+
 	fractionalDigits := allDigits % 100
 	integralDigits := (allDigits - fractionalDigits) / 100
 	return Money{
@@ -69,12 +72,18 @@ func (m Money) Clone(allDigits int64) Money {
 		m.CurrencySymbol,
 		m.formatShort,
 		m.formatWide,
+		m.formatString,
 	}
 }
 
 // Short returns a short format, typically 7 characters wide 0000.00
 func (m Money) Short() string {
 	return fmt.Sprintf(m.formatShort, m.integralDigits, m.fractionalDigits)
+}
+
+// ToString returns a formatted string with currency symbol and currency amount with fractional digits
+func (m Money) ToString() string {
+	return fmt.Sprintf(m.formatString, m.integralDigits, m.fractionalDigits)
 }
 
 // Wide returns a wide format,  14  characters wide,
