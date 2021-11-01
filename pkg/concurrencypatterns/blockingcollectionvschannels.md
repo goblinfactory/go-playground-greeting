@@ -72,7 +72,7 @@ public static IEnumerable<int> GenerateNums(int cnt) {
         <li>Goroutines are much more lightweigh than a thread. 1 Thread per multiple goroutines.
 		<li>Goroutines are more optimal use less memory. Not an advantage in trivial examples but is serious when you're storing and creating hundreds of collections.
 		<li>defer guarantees the channel closes, and doesnt cause extra indenting that makes code harder to read. Many cases are simply 1 liners.
-		<li>Code does need to be modified when used asychronously.
+		<li>Code does <b>not</b> need to be modified when used asychronously.
     </ul>
 </td>
 <td>
@@ -154,13 +154,7 @@ This is a draft : Still need to add to the bottom where this pattern goes horrib
 
 TBD.
 
-update: 16:25 Mon, 1 Nov: I have just stumpled across C# Channels. So everything may or may not be relevant.
-
-This is part of my issue with C#, the amount of deep knowledge you need to have about libraries, and edge cases, when to use which library is immense. Deep knowledge required + CHURN - I might be wrong, but I don't appear to have the same problem with Go.
-
-Go = Learn the basics, ...that's all, (it's a fixed surface area) now go and spend time deep in your customer's domains, and go extra deep in enterprise patterns specifically relevant to the problem space your business is in.
-
-Job done?
+update: 16:25 Mon, 1 Nov: I have just stumpled across C# Channels for the first time (`System.Threading.Tasks.Channels`). So the comparison above may or may not be relevant, or the best comparison. Going to put a pin in this and come back to this later.
 
 Below are the links that I stumbled across, and not finished reading yet : it's a lot to take in.
 
