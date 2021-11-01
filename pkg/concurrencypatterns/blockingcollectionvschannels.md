@@ -2,13 +2,13 @@
 
 Don't do this; i.e. don't use channels and functions to create collections. It's the wrong use of concurrecy; This contrived example is shown here so that we can have some insights to compare channels to C# BlockingCollection and Threads.
 
-<table>
+<table style="padding:0px">
 <tr>
 <th>Go</th>
 <th>C#</th>
 </tr>
 <tr>
-<td style="vertical-align: top;padding:0px">
+<td style="vertical-align:top;padding:0px;font-size:smaller">
 
 ```go
 package concurrencypatterns
@@ -37,7 +37,7 @@ func generateNumbers(cnt int) <-chan int {
 ```
 
 </td>
-<td style="vertical-align: top;padding:0px" >
+<td style="vertical-align:top;padding:0px;font-size:smaller" >
 
 ```csharp
 using System;
