@@ -8,22 +8,18 @@ Don't do this; i.e. don't use channels and functions to create collections. It's
 <th>C#</th>
 </tr>
 <tr>
-<td style="vertical-align:top;padding:0px;font-size:smaller">
+<td style="vertical-align:top;">
 
 ```go
-package concurrencypatterns
-
-import "fmt"
 
 func main() {
-	for n := range generateNumbers(10) {
+	for n := range GenerateNums(10) {
 		fmt.Println(n)
 	}
 }
 
-func generateNumbers(cnt int) <-chan int {
+func GenerateNums(cnt int) <-chan int {
 	ch := make(chan int)
-	// start a goroutine to push 10 ints to the channel
 	go func() {
 		for i := 0; i < cnt; i++ {
 			fmt.Printf("Adding: %d\n", i)
@@ -33,41 +29,30 @@ func generateNumbers(cnt int) <-chan int {
 	}()
 	return ch
 }
-
 ```
 
 </td>
-<td style="vertical-align:top;padding:0px;font-size:smaller" >
+<td style="vertical-align:top;" >
 
 ```csharp
-using System;
-using System.Collections.Concurrent;
-using System.Threading;
-using System.Threading.Tasks;
 
-public class Program
+public static void Main()
 {
-	public static void Main()
-	{
-		var nums = GenerateNums(10);
+	foreach(var n in GenerateNums(10)) {
+		Console.WriteLine("num: {0}", n);
+	}
+}
 
-		foreach(var n in nums.GetConsumingEnumerable()) {
-			Console.WriteLine("num: {0}", n);
+public static IEnumerable<int> GenerateNums(int cnt) {
+	var bc = new BlockingCollection<int>(1);
+	Task.Run(()=> {
+		for(int i=1; i<cnt; i++) {
+			Console.WriteLine("adding: {0}", i);
+			bc.Add(i);
 		}
-	}
-
-	public static BlockingCollection<int> GenerateNums(int max) {
-		var bc = new BlockingCollection<int>(1);
-		// start a task to push 10 ints to the blocking collection
-		Task.Run(()=> {
-			for(int i=1; i<11; i++) {
-				Console.WriteLine("adding: {0}", i);
-				bc.Add(i);
-			}
-			bc.CompleteAdding();
-		});
-		return bc;
-	}
+		bc.CompleteAdding();
+	});
+	return bc.GetConsumingEnumerable();
 }
 ```
 
