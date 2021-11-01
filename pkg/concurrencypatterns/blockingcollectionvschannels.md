@@ -1,8 +1,6 @@
-# Compare Golang channels withC# BlockingCollection & Threads
+# Compare Go channels with C#'s BlockingCollection & Threads
 
 Don't do this; i.e. don't use channels and functions to create collections. It's the wrong use of concurrecy; This contrived example is shown here so that we can have some insights to compare channels to C# BlockingCollection and Threads. Typically this might be an expensive operation, calculateExpensiveFoo. I've not used long names in the example below, because the code doesnt fit in side by side when i do! Please use your imagination. 😇
-
-This is a draft : Still need to add to the bottom where this pattern goes horribly wrong (deadlocks)and how to fix it (improve) the code in both C# and Go. Real Go advantages start to kick in with select. Need to add that below.
 
 <table style="padding:0px">
 <tr>
@@ -147,3 +145,20 @@ num: 10
 </td>
 </tr>
 </table>
+
+This is a draft : Still need to add to the bottom where this pattern goes horribly wrong (deadlocks)and how to fix it (improve) the code in both C# and Go. Real Go advantages start to kick in with select. Need to add that below.
+
+# Compare Go's select vs C#
+
+`select` allows you to block until any of a number of blocking channels `unblocks` with waiting channel data. This is a complex software pattern to solve in other languages and is **imho** one of the core unsung differentiators between go and other languages. I'll attempt to find the best idiomatic C# equivalent and compare the two with real typical use cases for both languages. The examples will be more complex and won't be able to be shown side by side due to limit of column width with github markdown.
+
+TBD.
+
+update: 16:25 Mon, 1 Nov: I have just stumpled across C# Channels. So everything may or may not be relevant.
+
+This is part of my issue with C#, the amount of deep knowledge you need to have about libraries, and edge cases, when to use which library is immense. I might be wrong, but I don't appear to have the same problem with Go.
+
+Below are the links that I stumbled across, and not finished reading yet : it's a lot to take in.
+
+-   https://alexyakunin.medium.com/go-vs-c-part-1-goroutines-vs-async-await-ac909c651c11
+-   https://www.dotnetcurry.com/dotnetcore/1509/async-dotnetcore-pattern
