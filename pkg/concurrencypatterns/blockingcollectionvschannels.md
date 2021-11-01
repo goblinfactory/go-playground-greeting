@@ -10,9 +10,15 @@ This is a draft : Still need to add to the bottom where this pattern goes horrib
 <th>[C#]</th>
 </tr>
 <tr>
+	<td>
+		https://play.golang.org/p/F8kAX9Xi81u
+	</td>
+	<td>
+		https://dotnetfiddle.net/kS6jdv
+	</td>
+</tr>
+<tr>
 <td style="vertical-align:top;">
-
-https://play.golang.org/p/F8kAX9Xi81u
 
 ```go
 func main() {
@@ -35,9 +41,7 @@ func GenerateNums(cnt int) <-chan int {
 ```
 
 </td>
-<td style="vertical-align:top;" >
-
-https://dotnetfiddle.net/kS6jdv
+<td style="vertical-align:top;">
 
 ```csharp
 public static void Main() {
