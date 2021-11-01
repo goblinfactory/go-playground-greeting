@@ -2,7 +2,7 @@
 
 Don't do this; i.e. don't use channels and functions to create collections. It's the wrong use of concurrecy; This contrived example is shown here so that we can have some insights to compare channels to C# BlockingCollection and Threads. Typically this might be an expensive operation, calculateExpensiveFoo. I've not used long names in the example below, because the code doesnt fit in side by side when i do! Please use your imagination. 😇
 
-This is a draft : Still need to add to the bottom where this pattern goes horribly wrong (deadlocks)and how to fix it (improve) the code in both C# and Go.
+This is a draft : Still need to add to the bottom where this pattern goes horribly wrong (deadlocks)and how to fix it (improve) the code in both C# and Go. Real Go advantages start to kick in with select. Need to add that below.
 
 <table style="padding:0px">
 <tr>
@@ -12,7 +12,7 @@ This is a draft : Still need to add to the bottom where this pattern goes horrib
 <tr>
 <td style="vertical-align:top;">
 
-https://play.golang.org/p/bk3jeQF1qWy
+https://play.golang.org/p/F8kAX9Xi81u
 
 ```go
 
@@ -25,11 +25,11 @@ func main() {
 func GenerateNums(cnt int) <-chan int {
 	ch := make(chan int, 5)
 	go func() {
+		defer close(ch)
 		for i := 0; i < cnt; i++ {
 			fmt.Printf("Adding: %d\n", i)
 			ch <- i
 		}
-		close(ch)
 	}()
 	return ch
 }
@@ -38,7 +38,7 @@ func GenerateNums(cnt int) <-chan int {
 </td>
 <td style="vertical-align:top;" >
 
-https://dotnetfiddle.net/888edB
+https://dotnetfiddle.net/kS6jdv
 
 ```csharp
 
@@ -51,11 +51,14 @@ public static void Main() {
 public static IEnumerable<int> GenerateNums(int cnt) {
 	var bc = new BlockingCollection<int>(1);
 	Task.Run(()=> {
-		for(int i=1; i<cnt; i++) {
-			Console.WriteLine("adding: {0}", i);
-			bc.Add(i);
+		try {
+			for(int i=1; i<cnt; i++) {
+				Console.WriteLine("adding: {0}", i);
+				bc.Add(i);
+			}
+		} finally {
+			bc.CompleteAdding();
 		}
-		bc.CompleteAdding();
 	});
 	return bc.GetConsumingEnumerable();
 }
@@ -67,11 +70,13 @@ public static IEnumerable<int> GenerateNums(int cnt) {
 <td>
     <ul>
         <li>Goroutines are much more lightweigh than a thread. 1 Thread per multiple goroutines.
+		<li>Goroutines are more optimal use less memory. Not a huge advantage over C# unless you're creating hundreds of collections.
     </ul>
 </td>
 <td>
     <ul>
-        <li>Each task, uses a thread.
+        <li>Each task, uses a thread. 
+		<li>Thread per task run is not serious in this example, but could become an issue if we needed 1000 collections.
     </ul>    
 </td>
 </tr>
