@@ -17,6 +17,7 @@ Collection of small simple experiments in different go language topics. Note, th
 
 -   channels and concurrency
 
+    -   [channels can be constrained as read-only or write-only](pkg/concurrencypatterns/directionalchannels.go)
     -   [demo showing how deadlock can occur](pkg/concurrencypatterns/sampledeadlock.go)
         -   sample showing how reading and writing to two channels in different order causes a deadlock.
     -   [for select loop pattern](pkg/concurrencypatterns/forselectloop.go)
@@ -24,7 +25,6 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [simple signal channels](pkg/muxyidiomatic/muxyidiomaticsignals.go)
     -   [quote stream (stream of quotes pushed to a channel)](pkg/bloggy/quotestream/quotestream.go)
     -   [signal channels together with waitgroup](pkg/muxyidiomatic/muxyidiomaticwaitgroup.go)
-
     -   [channels for service status](pkg/channels/servicestatuschannels.go)
     -   [magic numbers in channels](pkg/channels/magicnumberchannel.go)
 
