@@ -1,16 +1,18 @@
 # Compare Golang channels withC# BlockingCollection & Threads
 
-Don't do this; i.e. don't use channels and functions to create collections. It's the wrong use of concurrecy; This contrived example is shown here so that we can have some insights to compare channels to C# BlockingCollection and Threads.
+Don't do this; i.e. don't use channels and functions to create collections. It's the wrong use of concurrecy; This contrived example is shown here so that we can have some insights to compare channels to C# BlockingCollection and Threads. Typically this might be an expensive operation, calculateExpensiveFoo. I've not used long names in the example below, because the code doesnt fit in side by side when i do! Please use your imagination. 😇
 
-Typically this might be an expensive operation, calculateExpensiveFoo. I've not used long names in the example below, because the code doesnt fit in side by side when i do! Please use your imagination. 😇
+This is a draft : Still need to add to the bottom where this pattern goes horribly wrong (deadlocks)and how to fix it (improve) the code in both C# and Go.
 
 <table style="padding:0px">
 <tr>
 <th>Go</th>
-<th>[C#](https://dotnetfiddle.net/ReDK9q)</th>
+<th>[C#]</th>
 </tr>
 <tr>
 <td style="vertical-align:top;">
+
+https://play.golang.org/p/bk3jeQF1qWy
 
 ```go
 
@@ -21,7 +23,7 @@ func main() {
 }
 
 func GenerateNums(cnt int) <-chan int {
-	ch := make(chan int)
+	ch := make(chan int, 5)
 	go func() {
 		for i := 0; i < cnt; i++ {
 			fmt.Printf("Adding: %d\n", i)
@@ -35,6 +37,8 @@ func GenerateNums(cnt int) <-chan int {
 
 </td>
 <td style="vertical-align:top;" >
+
+https://dotnetfiddle.net/888edB
 
 ```csharp
 
@@ -80,27 +84,27 @@ Running the code above produces the following output
 <td style="vertical-align: top;">
 
 ```ruby
-
 Adding: 0
 Adding: 1
-0
-1
 Adding: 2
 Adding: 3
-2
-3
 Adding: 4
 Adding: 5
+Adding: 6
+0
+1
+2
+3
 4
 5
-Adding: 6
-Adding: 7
 6
-7
+Adding: 7
 Adding: 8
 Adding: 9
+7
 8
 9
+
 
 ```
 
@@ -111,22 +115,22 @@ Adding: 9
 adding: 1
 adding: 2
 adding: 3
-num: 1
 adding: 4
+adding: 5
+adding: 6
+num: 1
 num: 2
 num: 3
-adding: 5
 num: 4
-adding: 6
 num: 5
 adding: 7
-num: 6
 adding: 8
-num: 7
 adding: 9
+adding: 10
+num: 6
+num: 7
 num: 8
 num: 9
-adding: 10
 num: 10
 ```
 
