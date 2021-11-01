@@ -7,7 +7,7 @@ Typically this might be an expensive operation, calculateExpensiveFoo. I've not 
 <table style="padding:0px">
 <tr>
 <th>Go</th>
-<th>C#</th>
+<th>[C#](https://dotnetfiddle.net/ReDK9q)</th>
 </tr>
 <tr>
 <td style="vertical-align:top;">
