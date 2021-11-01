@@ -8,7 +8,7 @@ Don't do this; i.e. don't use channels and functions to create collections. It's
 <th>C#</th>
 </tr>
 <tr>
-<td style="vertical-align: top;">
+<td style="vertical-align: top;padding:0px">
 
 ```go
 package concurrencypatterns
@@ -37,7 +37,7 @@ func generateNumbers(cnt int) <-chan int {
 ```
 
 </td>
-<td style="vertical-align: top;" >
+<td style="vertical-align: top;padding:0px" >
 
 ```csharp
 using System;
