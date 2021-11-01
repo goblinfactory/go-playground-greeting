@@ -54,10 +54,10 @@ public static IEnumerable<int> GenerateNums(int cnt) {
 	var bc = new BlockingCollection<int>(1);
 	Task.Run(()=> {
 		try {
-			for(int i=1; i<cnt; i++) {
-				Console.WriteLine("adding: {0}", i);
-				bc.Add(i);
-			}
+		  for(int i=1; i<cnt; i++) {
+			Console.WriteLine("adding: {0}", i);
+			bc.Add(i);
+		  }
 		} finally {
 			bc.CompleteAdding();
 		}
