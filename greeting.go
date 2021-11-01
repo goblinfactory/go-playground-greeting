@@ -1,11 +1,8 @@
 package main
 
-import (
-	"github.com/goblinfactory/greeting/pkg/concurrencypatterns"
-)
-
 func main() {
-	concurrencypatterns.DemoForSelectLoop()
+
+	//concurrencypatterns.DemoDeadlocking()
 	//errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
 	// errorhandling.Demo1()
 	// errorhandling.Demo2()

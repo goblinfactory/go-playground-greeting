@@ -10,8 +10,8 @@ func NewGBP(amount float64) GBP {
 }
 
 // Add ...
-func (m GBP) Add(rhs GBP) Money {
-	return m.Clone(m.allDigits + rhs.allDigits)
+func (m GBP) Add(rhs GBP) GBP {
+	return GBP{m.Clone(m.allDigits + rhs.allDigits)}
 }
 
 // Subtract ...

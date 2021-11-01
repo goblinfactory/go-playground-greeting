@@ -17,6 +17,8 @@ Collection of small simple experiments in different go language topics. Note, th
 
 -   channels and concurrency
 
+    -   [demo showing how deadlock can occur](pkg/concurrencypatterns/sampledeadlock.go)
+        -   sample showing how reading and writing to two channels in different order causes a deadlock.
     -   [for select loop pattern](pkg/concurrencypatterns/forselectloop.go)
         -   example showing how writing `done{}` to a blocking channel is a brilliantly simple way to signal to a goRoutine to finish, and block until that's done.
     -   [simple signal channels](pkg/muxyidiomatic/muxyidiomaticsignals.go)
@@ -74,6 +76,7 @@ Semi curated list of spike code that I suspect I will need quick access to.
 -   goroutines (threading and async)
 
     -   [async spike, download files and similar to Task.WaitAll](pkg/bloggy/spikeasync.go)
+    -   [BlockingCollection vs channels](pkg/concurrencypatterns/wowthisissubtle.go)
 
 -   linq
 
