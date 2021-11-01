@@ -2,6 +2,8 @@
 
 Don't do this; i.e. don't use channels and functions to create collections. It's the wrong use of concurrecy; This contrived example is shown here so that we can have some insights to compare channels to C# BlockingCollection and Threads.
 
+Typically this might be an expensive operation, calculateExpensiveFoo. I've not used long names in the example below, because the code doesnt fit in side by side when i do! Please use your imagination. 😇
+
 <table style="padding:0px">
 <tr>
 <th>Go</th>
@@ -36,8 +38,7 @@ func GenerateNums(cnt int) <-chan int {
 
 ```csharp
 
-public static void Main()
-{
+public static void Main() {
 	foreach(var n in GenerateNums(10)) {
 		Console.WriteLine("num: {0}", n);
 	}
