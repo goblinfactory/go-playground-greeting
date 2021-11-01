@@ -76,7 +76,7 @@ Semi curated list of spike code that I suspect I will need quick access to.
 -   goroutines (threading and async)
 
     -   [async spike, download files and similar to Task.WaitAll](pkg/bloggy/spikeasync.go)
-    -   [BlockingCollection vs channels](pkg/concurrencypatterns/blockingcollectionvschannels.go)
+    -   [BlockingCollection vs channels](pkg/concurrencypatterns/blockingcollectionvschannels.md)
 
 -   linq
 
