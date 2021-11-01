@@ -1,8 +1,10 @@
 package main
 
+import "github.com/goblinfactory/greeting/pkg/concurrencypatterns"
+
 func main() {
 
-	//concurrencypatterns.DemoDeadlocking()
+	concurrencypatterns.WowThisIsSubtle()
 	//errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
 	// errorhandling.Demo1()
 	// errorhandling.Demo2()
