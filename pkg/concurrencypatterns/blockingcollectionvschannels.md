@@ -14,7 +14,7 @@ This is a draft : Still need to add to the bottom where this pattern goes horrib
 		https://play.golang.org/p/F8kAX9Xi81u
 	</td>
 	<td>
-		https://dotnetfiddle.net/kS6jdv
+		https://dotnetfiddle.net/6Cabjc
 	</td>
 </tr>
 <tr>
@@ -51,7 +51,7 @@ public static void Main() {
 }
 
 public static IEnumerable<int> GenerateNums(int cnt) {
-	var bc = new BlockingCollection<int>(1);
+	var bc = new BlockingCollection<int>(5);
 	Task.Run(()=> {
 		try {
 		  for(int i=1; i<cnt; i++) {
@@ -72,13 +72,16 @@ public static IEnumerable<int> GenerateNums(int cnt) {
 <td>
     <ul>
         <li>Goroutines are much more lightweigh than a thread. 1 Thread per multiple goroutines.
-		<li>Goroutines are more optimal use less memory. Not a huge advantage over C# unless you're creating hundreds of collections.
+		<li>Goroutines are more optimal use less memory. Not an advantage in trivial examples but is serious when you're storing and creating hundreds of collections.
+		<li>defer guarantees the channel closes, and doesnt cause extra indenting that makes code harder to read. Many cases are simply 1 liners.
+		<li>Code does need to be modified when used asychronously.
     </ul>
 </td>
 <td>
     <ul>
         <li>Each task, uses a thread. 
 		<li>Thread per task run is not serious in this example, but could become an issue if we needed 1000 collections.
+		<li>return type and code needs to change if you want to call this code using async.
     </ul>    
 </td>
 </tr>
