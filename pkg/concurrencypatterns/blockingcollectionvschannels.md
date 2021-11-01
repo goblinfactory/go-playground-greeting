@@ -156,9 +156,17 @@ TBD.
 
 update: 16:25 Mon, 1 Nov: I have just stumpled across C# Channels. So everything may or may not be relevant.
 
-This is part of my issue with C#, the amount of deep knowledge you need to have about libraries, and edge cases, when to use which library is immense. I might be wrong, but I don't appear to have the same problem with Go.
+This is part of my issue with C#, the amount of deep knowledge you need to have about libraries, and edge cases, when to use which library is immense. Deep knowledge required + CHURN - I might be wrong, but I don't appear to have the same problem with Go.
+
+Go = Learn the basics, ...that's all, (it's a fixed surface area) now go and spend time deep in your customer's domains, and go extra deep in enterprise patterns specifically relevant to the problem space your business is in.
+
+Job done?
 
 Below are the links that I stumbled across, and not finished reading yet : it's a lot to take in.
 
 -   https://alexyakunin.medium.com/go-vs-c-part-1-goroutines-vs-async-await-ac909c651c11
 -   https://www.dotnetcurry.com/dotnetcore/1509/async-dotnetcore-pattern
+
+My mates keep telling me to stop doing side by side comparison, and just focus on learning Go.
+
+Sob, ...I may have to do just that.
