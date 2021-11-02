@@ -25,17 +25,17 @@ func DemoBufferedChannels() {
 	// The calls to the service will be concurrent so getting all the weights for all the products shouldnt take more than
 	// the time for the longest call to complete fetching all the values;  average max is 2000 ms at the bottom.
 
-	start := time.Now()
 	for p := range lookupProductWeights(products) {
 		rnd.SleepMinMaxMs(200, 600)
-		ms := time.Since(start).Milliseconds()
-		fmt.Printf("%s - %00.2fkg \t: %4dms\n", p.id, p.weight, ms)
+
+		fmt.Printf("%s - %00.2fkg \t: %4dms\n", p.id, p.weight, p.requestDuration)
 	}
 }
 
 type productWeight struct {
-	id     string
-	weight float64
+	id              string
+	weight          float64
+	requestDuration int64
 }
 
 // lookupProductWeights (using a buffered channel) this is somewhat similar to C#'s new IAsyncEnumerable
@@ -46,11 +46,14 @@ func lookupProductWeights(IDs []string) <-chan productWeight {
 	cnt := len(IDs)
 	wg.Add(cnt)
 	ch := make(chan productWeight, cnt)
+	start := time.Now()
 
 	for _, id := range IDs {
 		go func(id string) {
 			defer wg.Done()
-			ch <- productWeight{id, lookupProductWeight(id)}
+			weight := lookupProductWeight(id)
+			ms := time.Since(start).Milliseconds()
+			ch <- productWeight{id, weight, ms}
 		}(id)
 	}
 	// no idea if this is clever or not, but it seems to get the job done?
@@ -77,14 +80,14 @@ and the services then completing before the whole feed is processed.
 
 Running above code produces
 
-kbd-01 - 1.94kg 	:  391ms
-hea-72 - 10.30kg 	:  881ms
-ssd-16 - 16.27kg 	: 1160ms
-cpu-91 - 4.29kg 	: 1401ms
+kbd-01 - 1.94kg 	:   81ms
+hea-72 - 10.30kg 	:  203ms
+mon-13 - 16.27kg 	:  220ms
+cpu-91 - 4.29kg 	:  364ms
 all done
-kbd-02 - 6.36kg 	: 1912ms
-mon-23 - 5.66kg 	: 2384ms
-mon-13 - 5.86kg 	: 2917ms
-cas-66 - 4.06kg 	: 3380ms
+kbd-02 - 6.36kg 	:  848ms
+ssd-16 - 5.66kg 	: 1011ms
+mon-23 - 5.86kg 	: 1068ms
+cas-66 - 4.06kg 	: 1419ms
 
 */
