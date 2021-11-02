@@ -4,7 +4,7 @@ import "github.com/goblinfactory/greeting/pkg/concurrencypatterns"
 
 func main() {
 
-	concurrencypatterns.DemoUsingDoneChannel()
+	concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators()
 	//errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
 	// errorhandling.Demo1()
 	// errorhandling.Demo2()

@@ -18,6 +18,7 @@ Collection of small simple experiments in different go language topics. Note, th
 -   channels and concurrency
 
     -   [channels can be constrained as read-only or write-only](pkg/concurrencypatterns/directionalchannels.go)
+    -   [use cancel function instead of signal channel to cancel long running goroutines](pkg/concurrencypatterns/cancelfunction.go)
     -   [demo showing how deadlock can occur](pkg/concurrencypatterns/sampledeadlock.go)
         -   sample showing how reading and writing to two channels in different order causes a deadlock.
     -   [for select loop pattern](pkg/concurrencypatterns/forselectloop.go)

@@ -3,7 +3,8 @@ package concurrencypatterns
 import (
 	"fmt"
 	"net/http"
-	"sync"
+
+	"github.com/goblinfactory/greeting/pkg/checkablewaitgroup.go"
 )
 
 // DemoUsingDoneChannel ...
@@ -14,24 +15,25 @@ func DemoUsingDoneChannel() {
 		"https://cnn.com",
 	}
 
-	var wg sync.WaitGroup
-	f := returnFastestWebsiteToRespond(&wg, ws)
-	fmt.Println("fastest", f.status, f.url)
+	wg := checkablewaitgroup.New()
+	f := returnFastestWebsiteToRespond(wg, ws)
+	fmt.Println("fastest", f.url)
 	wg.Wait()
 }
+
+const indent = "   "
 
 type result struct {
 	status int
 	url    string
 }
 
-func returnFastestWebsiteToRespond(wg *sync.WaitGroup, urls []string) result {
+func returnFastestWebsiteToRespond(wg *checkablewaitgroup.WaitGroup, urls []string) result {
 	done := make(chan struct{})
 	results := make(chan result)
 
 	for _, ws := range urls {
 		wg.Add(1)
-		fmt.Println("GET ", ws)
 		go func(url string) {
 			select {
 			case results <- getStatus(wg, url):
@@ -48,23 +50,32 @@ func returnFastestWebsiteToRespond(wg *sync.WaitGroup, urls []string) result {
 	return r
 }
 
-func getStatus(wg *sync.WaitGroup, url string) result {
+func getStatus(wg *checkablewaitgroup.WaitGroup, url string) result {
 	defer wg.Done()
+	fmt.Println("GET ", url)
 	r, _ := http.Get(url) // in VScode setting breakpoint here appears to stop on a random thread. Need to test this in goland.
-	fmt.Println("response", url, "status", r.StatusCode)
+	printResponse(wg, r, url)
 	return result{r.StatusCode, url}
+}
+
+func printResponse(wg *checkablewaitgroup.WaitGroup, r *http.Response, url string) {
+	if wg.IsDone() {
+		fmt.Println(indent, "slower", url, "status", r.StatusCode)
+		return
+	}
+	fmt.Println(indent, "first", url, "status", r.StatusCode)
 }
 
 /*
 
 Running this code produces
 
-GET  https://www.goblinfactory.co.uk
-GET  https://www.google.co.uk
 GET  https://cnn.com
-response https://www.goblinfactory.co.uk status 200
-fastest 200 https://www.goblinfactory.co.uk
-response https://www.google.co.uk status 200
-response https://cnn.com status 200
+GET  https://www.google.co.uk
+GET  https://www.goblinfactory.co.uk
+    first https://www.goblinfactory.co.uk status 200
+fastest https://www.goblinfactory.co.uk
+    slower https://www.google.co.uk status 200
+    slower https://cnn.com status 200
 
 */
