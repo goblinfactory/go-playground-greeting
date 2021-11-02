@@ -4,7 +4,7 @@ import "github.com/goblinfactory/greeting/pkg/concurrencypatterns"
 
 func main() {
 
-	concurrencypatterns.WowThisIsSubtle()
+	concurrencypatterns.DemoUsingDoneChannel()
 	//errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
 	// errorhandling.Demo1()
 	// errorhandling.Demo2()
