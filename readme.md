@@ -17,6 +17,7 @@ Collection of small simple experiments in different go language topics. Note, th
 
 -   channels and concurrency
 
+    -   [buffered channels example showing concurrently calling microservice and returning results via a buffered channel](pkg/channels/bufferedchannels.go)
     -   [channels can be constrained as read-only or write-only](pkg/concurrencypatterns/directionalchannels.go)
     -   [use cancel function instead of signal channel to cancel long running goroutines](pkg/concurrencypatterns/cancelfunction.go)
     -   [demo showing how deadlock can occur](pkg/concurrencypatterns/sampledeadlock.go)

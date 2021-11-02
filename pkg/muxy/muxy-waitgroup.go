@@ -65,7 +65,7 @@ func getNumsIdiomatic(nums chan int, start int, stop chan struct{}, finished cha
 		default:
 			nums <- i
 			i = i + 2
-			rnd.Sleep(100, 500)
+			rnd.SleepMinMaxMs(100, 500)
 		}
 
 	}

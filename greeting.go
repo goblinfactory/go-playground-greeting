@@ -1,10 +1,12 @@
 package main
 
-import "github.com/goblinfactory/greeting/pkg/concurrencypatterns"
+import (
+	"github.com/goblinfactory/greeting/pkg/channels"
+)
 
 func main() {
-
-	concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators()
+	channels.DemoBufferedChannels()
+	//concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators()
 	//errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
 	// errorhandling.Demo1()
 	// errorhandling.Demo2()

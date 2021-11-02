@@ -43,6 +43,6 @@ func getNums(stop *bool, nums chan int, start int, fin chan struct{}) {
 		}
 		nums <- i
 		i = i + 2
-		rnd.Sleep(100, 500)
+		rnd.SleepMinMaxMs(100, 500)
 	}
 }

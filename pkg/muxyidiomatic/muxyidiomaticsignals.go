@@ -56,7 +56,7 @@ func streamNums(nums chan int, start int, stop chan bool, finished chan bool) {
 		default:
 			nums <- i
 			i = i + 2
-			rnd.Sleep(100, 500)
+			rnd.SleepMinMaxMs(100, 500)
 		}
 
 	}
