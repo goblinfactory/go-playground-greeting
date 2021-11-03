@@ -33,7 +33,7 @@ func NewWriter(bytesPerSecond int, filename string) FakeWriter {
 	return FakeWriter{bytesPerSecond}
 }
 
-// StartReading
+// StartReading ...
 func (r FakeReader) StartReading() {
 
 }

@@ -151,7 +151,9 @@ Semi curated list of spike code that I suspect I will need quick access to.
             ```
 
     -   [circuit breaker example from 'cloud native go'](pkg/bloggy/breaker/breaker.go)
-    -   [sample quote api using rate limiter return 429 if requests too fast](pkg/bloggy/quoteapi/quoteapi.go)
+    -   backpressure
+        -   [backpressure quotes and extracts](pkg/backpressuredemo/readme.md)
+        -   [sample quote api using rate limiter return 429 if requests too fast](pkg/bloggy/quoteapi/quoteapi.go)
 
 ### experimental
 

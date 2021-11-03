@@ -1,12 +1,10 @@
 package main
 
-import (
-	"github.com/goblinfactory/greeting/pkg/simon"
-)
+import "github.com/goblinfactory/greeting/pkg/channels"
 
 func main() {
-	simon.Greet()
-	//channels.DemoBufferedChannels()
+
+	channels.DemoBufferedChannels()
 	//concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators()
 	//errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
 	// errorhandling.Demo1()
