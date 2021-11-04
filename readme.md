@@ -2,8 +2,6 @@
 
 Collection of small simple experiments in different go language topics. Note, these have not been curated or even code reviewed, it's just a random collection of stuff.
 
-### language basics
-
 -   enums
 
     -   [example of consts enums and iota](pkg/erroraddress/erroraddress.go)
@@ -21,9 +19,7 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [channels can be constrained as read-only or write-only](pkg/concurrencypatterns/directionalchannels.go)
     -   [use cancel function instead of signal channel to cancel long running goroutines](pkg/concurrencypatterns/cancelfunction.go)
     -   [demo showing how deadlock can occur](pkg/concurrencypatterns/sampledeadlock.go)
-        -   sample showing how reading and writing to two channels in different order causes a deadlock.
     -   [for select loop pattern](pkg/concurrencypatterns/forselectloop.go)
-        -   example showing how writing `done{}` to a blocking channel is a brilliantly simple way to signal to a goRoutine to finish, and block until that's done.
     -   [simple signal channels](pkg/muxyidiomatic/muxyidiomaticsignals.go)
     -   [quote stream (stream of quotes pushed to a channel)](pkg/bloggy/quotestream/quotestream.go)
     -   [signal channels together with waitgroup](pkg/muxyidiomatic/muxyidiomaticwaitgroup.go)
@@ -50,14 +46,10 @@ Collection of small simple experiments in different go language topics. Note, th
 
     -   [Lissajous animated gif generator (from Learning Go book)](pkg/learninggo/lissajous.go)
 
-        ![](lisa1.gif)
-
 -   error handling
 
     -   [typical error handling](pkg/errorhandling/errorhandling.go)
     -   [custom error objects (dont do this)](pkg/errorhandling/customerrorswrong.go)
-        -   above example shows using a type switch with type assertion to access fields and methods of a custom error.
-        -   instead we are supposed to use `errors.As`
     -   [wrapping errors](pkg/errorhandling/wrappingerrors.go)
     -   [wrapping errors with defer](pkg/errorhandling/wrappingerrorwithdefer.go)
 
@@ -65,101 +57,41 @@ Collection of small simple experiments in different go language topics. Note, th
 
     -   [http server example from 'learning Go'](pkg/dependencyinjection/main.go)
 
-### important reference examples
-
-Semi curated list of spike code that I suspect I will need quick access to.
-
 -   console services
 
     -   [handling control-c properly](pkg/controlc/controlc.go)
-
-### switching from C#
 
 -   goroutines (threading and async)
 
     -   [async spike, download files and similar to Task.WaitAll](pkg/bloggy/spikeasync.go)
     -   [BlockingCollection vs channels](pkg/concurrencypatterns/blockingcollectionvschannels.md)
 
--   linq
+-   nolinq
 
     -   [no linq](pkg/nolinq/nolinq.go)
 
-        ```go
-            // querying objects in a similar to linq style, in go.
-            var cars = []car{
-                {1950, "Jay Leno", "buic", "red", 1},
-                {1965, "Jay Leno", "chrysler", "blue", 2},
-                {2000, "Fred", "bmw", "black", 3},
-                {2010, "Dan", "volvo", "red", 4},
-            }
+-   pseudo linq
 
-            var g = garage(cars)
+    -   [suffix](pkg/pseudolinq/suffix.go)
 
-            fmt.Println("\nVintage\n", g.vintage())
-            fmt.Println("\nRed\n", g.color("red"))
-            fmt.Println("\nVintage AND red\n", g.vintage().color("red"))
-            fmt.Println("\nVintage OR red\n", g.vintage().or(g.color("red")))
-        ```
+-   Software patterns
 
-        produces
-
-        ```log
-
-        Vintage
-        [{1950 Jay Leno buic red 1} {1965 Jay Leno chrysler blue 2}]
-
-        Red
-        [{1950 Jay Leno buic red 1} {2010 Dan volvo red 4}]
-
-        Vintage AND red
-        [{1950 Jay Leno buic red 1}]
-
-        Vintage OR red
-        [{1950 Jay Leno buic red 1} {1965 Jay Leno chrysler blue 2} {2010 Dan volvo red 4}]
-
-        ```
-
--   software patterns
-
-    -   [decorator, 3 lines](pkg/decorator/decorator_test.go)
-
-        -   [same code in C# jsfiddle](https://dotnetfiddle.net/9bRx4e)
-
-            ```go
-                type DecoratedAdd func(a int, b int) int
-
-                // this is such a quick way to implement a decorator
-                func (f DecoratedAdd) Add(a int, b int) int {
-                    fmt.Println("before")
-                    defer fmt.Println("after")
-                    r := f(a, b)
-                    fmt.Println("result", r)
-                    return r
-                }
-
-                func Test_howToUseDecorator(t *testing.T) {
-                    ad := DecoratedAdd(AddNums)
-                    r := ad.Add(1, 3)
-                    if r != 4 {
-                        t.Error("expected 4")
-                    }
-                }
-
-                func AddNums(a int, b int) int {
-                    return a + b
-                }
-            ```
-
-    -   [circuit breaker example from 'cloud native go'](pkg/bloggy/breaker/breaker.go)
+    -   [decorator : 3 lines](pkg/decorator/decorator_test.go)
+    -   [circuit breaker : example from 'cloud native go'](pkg/bloggy/breaker/breaker.go)
     -   backpressure
-        -   [backpressure quotes and extracts](pkg/backpressuredemo/readme.md)
+        -   [quotes and extracts](pkg/backpressuredemo/readme.md)
         -   [sample quote api using rate limiter return 429 if requests too fast](pkg/bloggy/quoteapi/quoteapi.go)
 
-### experimental
-
-Random spike projects, to test to see what it might take to write something yourself, without using a recommended package.
-
--   currency, money and hand rolled decimal-like types
+-   Random spikes
 
     -   [test account service](pkg/testaccountservice/testaccountservice.go)
     -   [money gpb, usd, zar](pkg/money/money.go)
+
+-   Learning references
+    -   Books
+        -   [Learning Go] _Jon Bodner_(https://www.oreilly.com/library/view/learning-go/9781492077206/)
+        -   [Cloud Native Go] _Matthew A. Timus_ (https://www.oreilly.com/library/view/cloud-native-go/9781492076322/)
+        -   [The Go Programming Language] _Alan A.A. Donovan, Brian W. Kerninghan_ ()
+        -   [Concurrency in Go] _Katherine Cox-Buday_ (https://www.pearson.com/us/higher-education/program/Donovan-Go-Programming-Language-The/PGM234922.html)
+    -   Online
+        -   https://golangbyexample.com/

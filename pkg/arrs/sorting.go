@@ -5,6 +5,8 @@ import (
 	"sort"
 )
 
+// TODO: compare using cpm.Equal instead of manually comparing as done below.
+
 // TestSorting yknow ...
 func TestSorting() {
 
@@ -48,3 +50,7 @@ func sortSafe(items []int) []int {
 	sort.Ints(n)
 	return n
 }
+
+//todo: check to see if there are existing libraries I should be using instead
+// check out the following
+// https://stackoverflow.com/questions/24534072/how-to-compare-if-two-structs-slices-or-maps-are-equal
