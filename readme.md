@@ -2,6 +2,14 @@
 
 Collection of small simple experiments in different go language topics. Note, these have not been curated or even code reviewed, it's just a random collection of stuff.
 
+-   Books & online resources
+    -   books
+        -   [Learning Go](https://www.oreilly.com/library/view/learning-go/9781492077206/) _Jon Bodner_
+        -   [Cloud Native Go](https://www.oreilly.com/library/view/cloud-native-go/9781492076322/) _Matthew A. Timus_
+        -   [The Go Programming Language](https://www.pearson.com/us/higher-education/program/Donovan-Go-Programming-Language-The/PGM234922.html) _Alan A.A. Donovan, Brian W. Kerninghan_
+        -   [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/) _Katherine Cox-Buday_
+    -   websites
+        -   https://golangbyexample.com/
 -   enums
 
     -   [example of consts enums and iota](pkg/erroraddress/erroraddress.go)
@@ -86,12 +94,3 @@ Collection of small simple experiments in different go language topics. Note, th
 
     -   [test account service](pkg/testaccountservice/testaccountservice.go)
     -   [money gpb, usd, zar](pkg/money/money.go)
-
--   Learning references
-    -   Books
-        -   [Learning Go](https://www.oreilly.com/library/view/learning-go/9781492077206/) _Jon Bodner_
-        -   [Cloud Native Go](https://www.oreilly.com/library/view/cloud-native-go/9781492076322/) _Matthew A. Timus_
-        -   [The Go Programming Language](https://www.pearson.com/us/higher-education/program/Donovan-Go-Programming-Language-The/PGM234922.html) _Alan A.A. Donovan, Brian W. Kerninghan_
-        -   [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/) _Katherine Cox-Buday_
-    -   Online
-        -   https://golangbyexample.com/
