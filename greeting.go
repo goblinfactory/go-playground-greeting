@@ -1,9 +1,12 @@
 package main
 
-import "github.com/goblinfactory/greeting/pkg/concurrencypatterns"
+import (
+	"github.com/goblinfactory/greeting/pkg/consolespikes"
+)
 
 func main() {
-	concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators()
+	consolespikes.TermDashSpike()
+	//concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators()
 	//errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
 	// errorhandling.Demo1()
 	// errorhandling.Demo2()
