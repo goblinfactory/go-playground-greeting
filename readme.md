@@ -68,6 +68,7 @@ Collection of small simple experiments in different go language topics. Note, th
 -   console services
 
     -   [handling control-c properly](pkg/controlc/controlc.go)
+    -   [termdash spike (simple window split left, right)](pkg/consolespikes/spiketermdash.go)
 
 -   goroutines (threading and async)
 
