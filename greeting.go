@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	consolespikes.TermDashSpike()
+	consolespikes.TermDashSpike2Columns()
 	//concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators()
 	//errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType()
 	// errorhandling.Demo1()

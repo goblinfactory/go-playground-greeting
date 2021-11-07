@@ -41,13 +41,44 @@ func writeQuotes(ctx context.Context, t *text.Text, delay time.Duration) {
 	}
 }
 
-// TermDashSpike ..
-func TermDashSpike() {
+// TermDashSpike2Columns ..
+func TermDashSpike2Columns() {
 
 	left, right, wg, ctx := SplitLeftRight("LEFTY", "RIGHTY")
-
 	left.Write("started\nPress 'q' to quit.\n")
 	go writeQuotes(ctx, right, 1*time.Second)
+
+	wg.Wait()
+}
+
+// TermDashSpike3Columns ..
+func TermDashSpike3Columns() {
+
+	left, _, right, wg, ctx := SplitColumns123("LEFTY", "MIDDLE", "RIGHTY")
+	left.Write("started\nPress 'q' to quit.\n")
+	go writeQuotes(ctx, right, 1*time.Second)
+
+	wg.Wait()
+}
+
+// TermDashSpike4Columns ..
+func TermDashSpike4Columns() {
+
+	c1, c2, c3, c4, wg, ctx := SplitColumns1234("LEFT1", "LEFT2", "RIGHT1", "RIGHT2")
+	c1.Write("started\nPress 'q' to quit.\n")
+	c2.Write("column2")
+	c3.Write("column3")
+	go writeQuotes(ctx, c4, 1*time.Second)
+
+	wg.Wait()
+}
+
+// TermDashSpikeTopBottomLayout ..
+func TermDashSpikeTopBottomLayout() {
+
+	top, bottom, wg, ctx := SplitTopBottom("top", "bottom")
+	top.Write("started\nPress 'q' to quit.\n")
+	go writeQuotes(ctx, bottom, 1*time.Second)
 
 	wg.Wait()
 }

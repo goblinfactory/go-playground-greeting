@@ -15,7 +15,7 @@ import (
 
 // experiment with creating a simple Goblinfactory.Konsole like dsl over termdash.
 
-// SplitLeftRight splits console window and returns left and right windows a context and a cancel. Will run until you press q or you call cancel()
+// SplitLeftRight splits console window and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
 func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
 
 	left, _ := text.New(text.RollContent(), text.WrapAtWords())
@@ -37,6 +37,113 @@ func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text
 	)
 	wg, ctx := runWindowLayout(layout)
 	return left, right, wg, ctx
+}
+
+// SplitTopBottom splits console window and returns top and bottom windows, a waitgroup and context. Will run until you press q or you call cancel()
+func SplitTopBottom(topTitle string, bottomTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+
+	top, _ := text.New(text.RollContent(), text.WrapAtWords())
+	bottom, _ := text.New(text.RollContent(), text.WrapAtWords())
+
+	layout := container.SplitHorizontal(
+		container.Top(
+			container.Border(linestyle.Light),
+			container.BorderTitleAlignCenter(),
+			container.BorderTitle(topTitle),
+			container.PlaceWidget(top),
+		),
+		container.Bottom(
+			container.Border(linestyle.Light),
+			container.BorderTitle(bottomTitle),
+			container.BorderTitleAlignCenter(),
+			container.PlaceWidget(bottom),
+		),
+	)
+	wg, ctx := runWindowLayout(layout)
+	return top, bottom, wg, ctx
+}
+
+// SplitColumns123 splits console window into 3 columnsw and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
+func SplitColumns123(col1title string, col2title string, col3title string) (*text.Text, *text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+
+	col1, _ := text.New(text.RollContent(), text.WrapAtWords())
+	col2, _ := text.New(text.RollContent(), text.WrapAtWords())
+	col3, _ := text.New(text.RollContent(), text.WrapAtWords())
+
+	layout := container.SplitVertical(
+		container.Left(
+			container.Border(linestyle.Light),
+			container.BorderTitleAlignCenter(),
+			container.BorderTitle(col1title),
+			container.PlaceWidget(col1),
+		),
+		container.Right(
+			container.SplitVertical(
+				container.Left(
+					container.Border(linestyle.Light),
+					container.BorderTitleAlignCenter(),
+					container.BorderTitle(col2title),
+					container.PlaceWidget(col2),
+				),
+				container.Right(
+					container.Border(linestyle.Light),
+					container.BorderTitleAlignCenter(),
+					container.BorderTitle(col3title),
+					container.PlaceWidget(col3),
+				),
+			),
+		), container.SplitPercent(33),
+	)
+
+	wg, ctx := runWindowLayout(layout)
+	return col1, col2, col3, wg, ctx
+}
+
+// SplitColumns1234 splits console window into 3 columnsw and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
+func SplitColumns1234(col1title string, col2title string, col3title string, col4title string) (*text.Text, *text.Text, *text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+
+	col1, _ := text.New(text.RollContent(), text.WrapAtWords())
+	col2, _ := text.New(text.RollContent(), text.WrapAtWords())
+	col3, _ := text.New(text.RollContent(), text.WrapAtWords())
+	col4, _ := text.New(text.RollContent(), text.WrapAtWords())
+
+	layout := container.SplitVertical(
+		container.Left(
+			container.SplitVertical(
+				container.Left(
+					container.Border(linestyle.Light),
+					container.BorderTitleAlignCenter(),
+					container.BorderTitle(col1title),
+					container.PlaceWidget(col1),
+				),
+				container.Right(
+					container.Border(linestyle.Light),
+					container.BorderTitleAlignCenter(),
+					container.BorderTitle(col2title),
+					container.PlaceWidget(col2),
+				),
+			),
+		),
+		container.Right(
+			container.SplitVertical(
+				container.Left(
+					container.Border(linestyle.Light),
+					container.BorderTitleAlignCenter(),
+					container.BorderTitle(col3title),
+					container.PlaceWidget(col3),
+				),
+				container.Right(
+					container.Border(linestyle.Light),
+					container.BorderTitleAlignCenter(),
+					container.BorderTitle(col4title),
+					container.PlaceWidget(col4),
+				),
+			),
+		),
+	)
+
+	wg, ctx := runWindowLayout(layout)
+	return col1, col2, col3, col4, wg, ctx
 }
 
 func runWindowLayout(layout container.Option) (*sync.WaitGroup, context.Context) {
