@@ -44,7 +44,7 @@ func writeQuotes(ctx context.Context, t *text.Text, delay time.Duration) {
 // TermDashSpike ..
 func TermDashSpike() {
 
-	left, right, wg, ctx := SplitLeftRight()
+	left, right, wg, ctx := SplitLeftRight("LEFTY", "RIGHTY")
 
 	left.Write("started\nPress 'q' to quit.\n")
 	go writeQuotes(ctx, right, 1*time.Second)

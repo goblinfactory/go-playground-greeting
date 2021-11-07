@@ -1,6 +1,6 @@
 package controlproducer
 
-// ControlTheProducer is a demo of using backpressure to reduce the speed of reading so that it matches the speed of writing
+// fakereaderwriter is a demo of using backpressure to reduce the speed of reading so that it matches the speed of writing, not yet implemented
 
 // func ControlTheProducer() {
 // 	r := fakeReader{100, "lisa1.gif", 200}

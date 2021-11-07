@@ -16,7 +16,30 @@ import (
 // experiment with creating a simple Goblinfactory.Konsole like dsl over termdash.
 
 // SplitLeftRight splits console window and returns left and right windows a context and a cancel. Will run until you press q or you call cancel()
-func SplitLeftRight() (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+
+	left, _ := text.New(text.RollContent(), text.WrapAtWords())
+	right, _ := text.New(text.RollContent(), text.WrapAtWords())
+
+	layout := container.SplitVertical(
+		container.Left(
+			container.Border(linestyle.Light),
+			container.BorderTitleAlignCenter(),
+			container.BorderTitle(leftTitle),
+			container.PlaceWidget(left),
+		),
+		container.Right(
+			container.Border(linestyle.Light),
+			container.BorderTitle(rightTitle),
+			container.BorderTitleAlignCenter(),
+			container.PlaceWidget(right),
+		),
+	)
+	wg, ctx := runWindowLayout(layout)
+	return left, right, wg, ctx
+}
+
+func runWindowLayout(layout container.Option) (*sync.WaitGroup, context.Context) {
 	var wg sync.WaitGroup
 
 	ctx, cancel := context.WithCancel(context.Background())
@@ -27,26 +50,7 @@ func SplitLeftRight() (*text.Text, *text.Text, *sync.WaitGroup, context.Context)
 		log.Fatal(err1)
 	}
 
-	left, _ := text.New(text.RollContent(), text.WrapAtWords())
-	right, _ := text.New(text.RollContent(), text.WrapAtWords())
-
-	c, err2 := container.New(
-		t,
-		container.SplitVertical(
-			container.Left(
-				container.Border(linestyle.Light),
-				container.BorderTitleAlignCenter(),
-				container.BorderTitle("Left window"),
-				container.PlaceWidget(left),
-			),
-			container.Right(
-				container.Border(linestyle.Light),
-				container.BorderTitle("Right window"),
-				container.BorderTitleAlignCenter(),
-				container.PlaceWidget(right),
-			),
-		),
-	)
+	c, err2 := container.New(t, layout)
 
 	if err2 != nil {
 		log.Fatal(err2)
@@ -54,7 +58,7 @@ func SplitLeftRight() (*text.Text, *text.Text, *sync.WaitGroup, context.Context)
 
 	wg.Add(1)
 	go runTermdashUntilUserPressesQuitKey(ctx, cancel, &wg, c, t)
-	return left, right, &wg, ctx
+	return &wg, ctx
 }
 
 func runTermdashUntilUserPressesQuitKey(ctx context.Context, cancel context.CancelFunc, wg *sync.WaitGroup, c *container.Container, t *tcell.Terminal) {
