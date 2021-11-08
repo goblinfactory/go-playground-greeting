@@ -1,23 +1,18 @@
 package main
 
-import (
-	"log"
-	"os"
-
-	"github.com/goblinfactory/greeting/pkg/consolespikes"
-)
+import "github.com/goblinfactory/greeting/pkg/backpressuredemo/controlproducer"
 
 func main() {
 
-	file, err := os.OpenFile("logs.txt", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0666)
-	if err != nil {
-		log.Fatal(err)
-	}
+	controlproducer.DemoConcurrencyLimiter()
 
-	log.SetOutput(file)
+	// file, err := os.OpenFile("logs.txt", os.O_TRUNC|os.O_CREATE|os.O_WRONLY, 0666)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// log.SetOutput(file)
 
-	consolespikes.TermDashSpike4ColumnsRedGreenPrinting()
-	//controlproducer.DemoConcurrencyLimiter()
+	//consolespikes.TermDashSpike4ColumnsRedGreenPrinting()
 
 	//consolespikes.TermDashSpike4Columns()
 	//concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators()

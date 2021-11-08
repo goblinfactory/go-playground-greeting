@@ -1,8 +1,7 @@
 package controlproducer
 
 import (
-	"log"
-	"time"
+	"github.com/goblinfactory/greeting/pkg/rnd"
 )
 
 // FakeDatabase is a fake database that uses a limited to throttle concurrency limit to max (n) connections at a time.
@@ -28,18 +27,13 @@ func NewFakeDatabase(maxConnections int) FakeDatabase {
 
 // AddCustomer ..
 func (db FakeDatabase) AddCustomer(correlationID string, customer FakeCustomer) (FakeCustomer, error) {
-	log.Println("adding customer", correlationID)
 	err := db.limiter.RunWithMaxConcurrency(func() {
-		time.Sleep(500 * time.Millisecond)
+		rnd.SleepMinMaxMs(100, 200)
 	})
 	if err == nil {
-		log.Println("sucess", correlationID)
 		return FakeCustomer{"F001", "Fred Flintstone "}, nil
 
 	}
-
-	log.Println("error", correlationID, err.Error())
-	time.Sleep(500 * time.Millisecond)
 	return FakeCustomer{"", ""}, err
 
 }

@@ -2,6 +2,8 @@ package controlproducer
 
 import (
 	"context"
+	"fmt"
+	"time"
 
 	"github.com/goblinfactory/greeting/pkg/consolespikes"
 	"github.com/mum4k/termdash/widgets/text"
@@ -28,29 +30,23 @@ func DemoConcurrencyLimiter() {
 
 func readWriteDemo(ctx context.Context, con *text.Text, db FakeDatabase, name string) {
 	k := consolespikes.NewKonsole(con)
-	k.Red("this is red\n")
-	k.Green("this is green\n")
-
 	i := 0
-
-	k.Green("i=", i, "\n")
-	return
-	// k.WriteLine("starting ", green, name, reset)
-	// for {
-	// 	i++
-	// 	select {
-	// 	case <-ctx.Done():
-	// 		k.Green("--finished--")
-	// 		return
-	// 	default:
-	// 		cid := fmt.Sprintf("%s:%d", name, i)
-	// 		_, err := db.AddCustomer(cid, FakeCustomer{})
-	// 		if err != nil {
-	// 			k.Red(err.Error())
-	// 		} else {
-	// 			log.Println(cid, "write ok")
-	// 			k.Green(cid, "write ok")
-	// 		}
-	// 	}
-	// }
+	k.WriteLine("starting ", name)
+	for {
+		i++
+		select {
+		case <-ctx.Done():
+			k.Green("--finished--\n")
+			return
+		default:
+			cid := fmt.Sprintf("%s:%d", name, i)
+			_, err := db.AddCustomer(cid, FakeCustomer{})
+			if err != nil {
+				k.Red(err.Error(), "\n")
+				time.Sleep(200 * time.Millisecond)
+			} else {
+				k.Green(cid, "write ok\n")
+			}
+		}
+	}
 }

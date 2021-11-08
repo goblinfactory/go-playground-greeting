@@ -39,7 +39,7 @@ func (c *Konsole) WriteLine(texts ...interface{}) {
 		default:
 			c.con.Write(fmt.Sprintf("%v", t))
 		}
-		if i == cnt {
+		if (i + 1) >= cnt {
 			c.con.Write("\n")
 		}
 	}
