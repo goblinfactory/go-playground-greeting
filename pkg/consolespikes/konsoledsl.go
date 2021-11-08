@@ -2,10 +2,12 @@ package consolespikes
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"sync"
 
 	"github.com/mum4k/termdash"
+	"github.com/mum4k/termdash/cell"
 	"github.com/mum4k/termdash/container"
 	"github.com/mum4k/termdash/linestyle"
 	"github.com/mum4k/termdash/terminal/tcell"
@@ -14,6 +16,73 @@ import (
 )
 
 // experiment with creating a simple Goblinfactory.Konsole like dsl over termdash.
+
+// Konsole provides utility methods for printing to windows
+type Konsole struct {
+	con *text.Text
+}
+
+// NewKonsole returns a new Konsole for managing printing to windows
+func NewKonsole(con *text.Text) Konsole {
+	return Konsole{con: con}
+}
+
+// WriteLine is useful for printing a number of objects including color.
+func (c *Konsole) WriteLine(texts ...interface{}) {
+	cnt := len(texts)
+	for i, t := range texts {
+		switch t := t.(type) {
+		case int:
+			c.con.Write(fmt.Sprintf("%d", t))
+		case string:
+			c.con.Write(fmt.Sprintf("%s", t))
+		default:
+			c.con.Write(fmt.Sprintf("%v", t))
+		}
+		if i == cnt {
+			c.con.Write("\n")
+		}
+	}
+}
+
+// Write is useful for printing a number of objects including color.
+func (c *Konsole) Write(texts ...interface{}) {
+	for _, t := range texts {
+		switch t := t.(type) {
+		case int:
+			c.con.Write(fmt.Sprintf("%d", t))
+		case string:
+			c.con.Write(fmt.Sprintf("%s", t))
+		default:
+			c.con.Write(fmt.Sprintf("%v", t))
+		}
+	}
+}
+
+// Red writes texts in red
+func (c *Konsole) Red(texts ...interface{}) {
+	c.writeColor(cell.ColorRed, texts...)
+}
+
+func (c *Konsole) writeColor(color cell.Color, texts ...interface{}) {
+	for _, t := range texts {
+		v := ""
+		switch t := t.(type) {
+		case int:
+			v = fmt.Sprintf("%d", t)
+		case string:
+			v = fmt.Sprintf("%s", t)
+		default:
+			v = fmt.Sprintf("%v", t)
+		}
+		c.con.Write(v, text.WriteCellOpts(cell.FgColor(color)))
+	}
+}
+
+// Green writes texts in green
+func (c *Konsole) Green(texts ...interface{}) {
+	c.writeColor(cell.ColorGreen, texts...)
+}
 
 // SplitLeftRight splits console window and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
 func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
