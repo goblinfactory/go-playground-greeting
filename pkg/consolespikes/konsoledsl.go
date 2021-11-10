@@ -64,6 +64,11 @@ func (c *Konsole) Red(texts ...interface{}) {
 	c.writeColor(cell.ColorRed, texts...)
 }
 
+// Gray writes texts in red
+func (c *Konsole) Gray(texts ...interface{}) {
+	c.writeColor(cell.ColorGray, texts...)
+}
+
 func (c *Konsole) writeColor(color cell.Color, texts ...interface{}) {
 	for _, t := range texts {
 		v := ""

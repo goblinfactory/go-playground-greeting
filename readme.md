@@ -33,6 +33,7 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [signal channels together with waitgroup](pkg/muxyidiomatic/muxyidiomaticwaitgroup.go)
     -   [channels for service status](pkg/channels/servicestatuschannels.go)
     -   [magic numbers in channels](pkg/channels/magicnumberchannel.go)
+    -   [setting a channel to nil to turn channel of and avoid wasting cpu cycles](pkg/channels/setchanneltonil.go)
 
 -   waitgroup
 

@@ -1,10 +1,12 @@
 package main
 
-import "github.com/goblinfactory/greeting/pkg/backpressuredemo/controlproducer"
+import (
+	"github.com/goblinfactory/greeting/pkg/channels"
+)
 
 func main() {
-
-	controlproducer.DemoConcurrencyLimiter()
+	channels.DemoActuallySettingChannelToNilTurnsOFFTheChannelWithZeroCPUWaste()
+	//controlproducer.DemoConcurrencyLimiter()
 	//consolespikes.TermDashSpike4ColumnsRedGreenPrinting()
 	//consolespikes.TermDashSpike4Columns()
 	//concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators()
