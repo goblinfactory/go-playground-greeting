@@ -2,6 +2,10 @@
 
 Collection of small simple experiments in different go language topics. Note, these have not been curated or even code reviewed, it's just a random collection of stuff.
 
+-   Best links : start here
+
+    -   [Golang concurrency patterns (talks.golang.org)](https://talks.golang.org/2012/concurrency.slide)
+
 -   Books & online resources
     -   books
         -   [Learning Go](https://www.oreilly.com/library/view/learning-go/9781492077206/) _Jon Bodner_
@@ -61,6 +65,8 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [custom error objects (dont do this)](pkg/errorhandling/customerrorswrong.go)
     -   [wrapping errors](pkg/errorhandling/wrappingerrors.go)
     -   [wrapping errors with defer](pkg/errorhandling/wrappingerrorwithdefer.go)
+    -   external links
+        -   []
 
 -   dependency injection
 
