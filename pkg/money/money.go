@@ -2,7 +2,11 @@ package money
 
 import (
 	"fmt"
+	"log"
+	"strconv"
 )
+
+//TODO: for simple hacking and demos, convert this to use float64 as a base type, with only 2 decimal precision.
 
 // Money ...
 type Money struct {
@@ -15,6 +19,7 @@ type Money struct {
 	formatShort      string
 	formatWide       string
 	formatString     string
+	parseString      string
 }
 
 // CurrencyNames ...
@@ -39,6 +44,7 @@ func new2DecimalFormatLeft(currencySymbol string, amount float64) Money {
 		currencySymbol + " %4d.%02d",
 		currencySymbol + " %11d.%02d",
 		currencySymbol + " %d.%02d",
+		"%d.%02d",
 	}
 	return m
 }
@@ -51,6 +57,13 @@ func (m Money) GreaterOrEqual(rhs Money) bool {
 // Add ...
 func (m Money) Add(rhs Money) Money {
 	return m.Clone(m.allDigits + rhs.allDigits)
+}
+
+// Multiply ...(this is an awful hack, just ok for demo's only, do not use in production)
+func (m Money) Multiply(amount float64) Money {
+	fv := m.ToFloat64()
+	newValue := fv * amount
+	return m.Clone(int64(newValue))
 }
 
 // Subtract ...
@@ -73,12 +86,23 @@ func (m Money) Clone(allDigits int64) Money {
 		m.formatShort,
 		m.formatWide,
 		m.formatString,
+		m.parseString,
 	}
 }
 
 // Short returns a short format, typically 7 characters wide 0000.00
 func (m Money) Short() string {
 	return fmt.Sprintf(m.formatShort, m.integralDigits, m.fractionalDigits)
+}
+
+// ToFloat64 returns a float64
+func (m Money) ToFloat64() float64 {
+	text := fmt.Sprintf(m.parseString, m.integralDigits, m.fractionalDigits)
+	value, err := strconv.ParseFloat(text, 64)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return value
 }
 
 // ToString returns a formatted string with currency symbol and currency amount with fractional digits

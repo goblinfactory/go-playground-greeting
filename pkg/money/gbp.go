@@ -1,12 +1,20 @@
 package money
 
 // GBP money
-type GBP struct{ Money }
+type GBP struct {
+	Money
+}
 
 // NewGBP returns a NewGBP money
 func NewGBP(amount float64) GBP {
 	m := new2DecimalFormatLeft("£", amount)
 	return GBP{m}
+}
+
+// Multiply ...(this is an awful hack, just ok for demo's only, do not use in production)
+// 3.1 x 1.1 = 31 x 11 / 100 = 341 / 100 = 3.41
+func (m GBP) Multiply(amount float64) GBP {
+	return NewGBP(m.ToFloat64() * amount)
 }
 
 // Add ...
