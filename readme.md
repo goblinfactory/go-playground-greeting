@@ -25,6 +25,11 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [sorting](pkg/arrs/sorting.go)
     -   [custom collections](pkg/customcollection/stringorintlist.go)
 
+-   file IO
+
+    -   [read write text files](pkg/fileio/textio/rwbinaryfiles.go)
+    -   [read write binary files](pkg/fileio/byteio/rwtextfiles.go)
+
 -   channels and concurrency
 
     -   [buffered channels example showing concurrently calling microservice and returning results via a buffered channel](pkg/channels/bufferedchannels.go)
