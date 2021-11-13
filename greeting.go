@@ -1,9 +1,9 @@
 package main
 
-import "github.com/goblinfactory/greeting/pkg/backpressuredemo/controlproducer"
-
 func main() {
-	controlproducer.DemoConcurrencyLimiter()
+
+	//controlproducer.DemoConcurrencyLimiter()
+
 	//sandbox2.DemoGatherAndProcess()
 	//sandbox1.DemoRunOnce()
 	//channels.DemoActuallySettingChannelToNilTurnsOFFTheChannelWithZeroCPUWaste()

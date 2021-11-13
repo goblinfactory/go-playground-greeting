@@ -29,6 +29,7 @@ Collection of small simple experiments in different go language topics. Note, th
 
     -   [read write text files](pkg/fileio/textio/rwbinaryfiles.go)
     -   [read write binary files](pkg/fileio/byteio/rwtextfiles.go)
+    -   [reading zip file](pkg/fileio/gzips/reading_test.go)
 
 -   channels and concurrency
 
