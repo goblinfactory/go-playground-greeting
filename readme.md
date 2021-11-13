@@ -32,6 +32,11 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [read write binary files](pkg/fileio/byteio/rwtextfiles.go)
     -   [reading zip file](pkg/fileio/gzips/reading_test.go)
 
+-   json marshalling
+
+    -   [anon structs and json](pkg/learninggo/anonstructsandjson.go)
+    -   [marshalling and unmarshalling (serialising and deserialising)](pkg/marshalling/marshalling_test.go)
+
 -   channels and concurrency
 
     -   [buffered channels example showing concurrently calling microservice and returning results via a buffered channel](pkg/channels/bufferedchannels.go)
@@ -57,10 +62,6 @@ Collection of small simple experiments in different go language topics. Note, th
 -   timing
 
     -   [timing example](pkg/timing/timing.go)
-
--   json
-
-    -   [anon structs and json](pkg/learninggo/anonstructsandjson.go)
 
 -   graphics
 
