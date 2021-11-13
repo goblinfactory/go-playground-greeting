@@ -1,0 +1,11 @@
+{
+    "id": "BUT01",
+    "name": "buttons",
+    "born": "2018-05-01T13:01:02Z",
+    "parent-id": "SLI01",
+    "locations": [
+        { "id": 1, "paddock": "A" },
+        { "id": 2, "paddock": "B" },
+        { "id": 3, "paddock": "C" }
+    ]
+}

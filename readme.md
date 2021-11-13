@@ -14,9 +14,10 @@ Collection of small simple experiments in different go language topics. Note, th
         -   [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/) _Katherine Cox-Buday_
     -   websites
         -   https://golangbyexample.com/
--   enums
+-   basic types, enums, datetime
 
     -   [example of consts enums and iota](pkg/erroraddress/erroraddress.go)
+    -   [time.Time](pkg/datetime/datetime_test.go)
 
 -   structs, maps and arrays
 
