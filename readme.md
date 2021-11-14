@@ -90,6 +90,10 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [async spike, download files and similar to Task.WaitAll](pkg/bloggy/spikeasync.go)
     -   [BlockingCollection vs channels](pkg/concurrencypatterns/blockingcollectionvschannels.md)
 
+-   net/http
+
+    -   [http REST calls to json api with json marshalling](pkg/nethttp/nethttp_test.go)
+
 -   nolinq
 
     -   [no linq](pkg/nolinq/nolinq.go)

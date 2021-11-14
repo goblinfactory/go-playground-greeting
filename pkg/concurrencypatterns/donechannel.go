@@ -53,6 +53,7 @@ func returnFastestWebsiteToRespond(wg *checkablewaitgroup.WaitGroup, urls []stri
 func getStatus(wg *checkablewaitgroup.WaitGroup, url string) result {
 	defer wg.Done()
 	fmt.Println("GET ", url)
+	// dont use http.Get etc in production, it has no timeout.
 	r, _ := http.Get(url) // in VScode setting breakpoint here appears to stop on a random thread. Need to test this in goland.
 	printResponse(wg, r, url)
 	return result{r.StatusCode, url}
