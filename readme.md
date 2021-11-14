@@ -63,6 +63,10 @@ Collection of small simple experiments in different go language topics. Note, th
 
     -   [timing example](pkg/timing/timing.go)
 
+-   context
+
+    -   [context with cancel example](pkg/spikequotes/bloggy.go)
+
 -   graphics
 
     -   [Lissajous animated gif generator (from Learning Go book)](pkg/learninggo/lissajous.go)
@@ -93,6 +97,7 @@ Collection of small simple experiments in different go language topics. Note, th
 -   net/http
 
     -   [http REST calls to json api with json marshalling](pkg/nethttp/nethttp_test.go)
+    -   [minimal http 2.0 server](pkg/nethttp/nethttpserver_test.go)
 
 -   nolinq
 
