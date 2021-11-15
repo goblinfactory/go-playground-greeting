@@ -119,3 +119,5 @@ Collection of small simple experiments in different go language topics. Note, th
 
     -   [test account service](pkg/testaccountservice/testaccountservice.go)
     -   [money gpb, usd, zar](pkg/money/money.go)
+
+    random text, test pushing commit from new machine.
