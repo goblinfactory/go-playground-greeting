@@ -121,3 +121,16 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [money gpb, usd, zar](pkg/money/money.go)
 
     random text, test pushing commit from new machine.
+
+-   Configuring goland first install
+
+    ```ruby
+    # paths, imports, lint, shadow
+    # ----------------------------
+    export GOPATH=$HOME/src/go-workspace
+    go export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    go install golang.org/x/tools/cmd/goimports@latest
+    go install golang.org/x/lint/golint@latest 
+    go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
+
+    ```
