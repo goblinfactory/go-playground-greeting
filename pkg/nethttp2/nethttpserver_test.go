@@ -1,4 +1,4 @@
-package nethttp
+package nethttp2
 
 import (
 	"context"
@@ -54,7 +54,7 @@ func TestMinimalHttpServer(t *testing.T) {
 		}
 	}()
 
-	time.Sleep(20 * time.Second)
+	time.Sleep(5 * time.Second)
 	fmt.Println("closing server")
 	cancel()
 }

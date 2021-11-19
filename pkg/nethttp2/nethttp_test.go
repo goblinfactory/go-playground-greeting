@@ -1,4 +1,4 @@
-package nethttp
+package nethttp2
 
 import (
 	"context"

@@ -128,9 +128,20 @@ Collection of small simple experiments in different go language topics. Note, th
     # paths, imports, lint, shadow
     # ----------------------------
     export GOPATH=$HOME/src/go-workspace
-    go export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+    export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
     go install golang.org/x/tools/cmd/goimports@latest
     go install golang.org/x/lint/golint@latest 
     go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
-
     ```
+
+-   ~/.zshrc settings
+
+    ```ruby
+        alias greet='cd src/go/go-workspace/src/github.com/goblinfactory/go-greet'
+    ```
+
+-   osx hints, first time users
+
+    - to edit zsh config `vi ~/.zshrc`
+    - [beginners guide to vi](https://www.redhat.com/sysadmin/introduction-vi-editor)
+
