@@ -145,3 +145,4 @@ Collection of small simple experiments in different go language topics. Note, th
     - to edit zsh config `vi ~/.zshrc`
     - [beginners guide to vi](https://www.redhat.com/sysadmin/introduction-vi-editor)
 
+-   [Random thoughts on Go (thoughts from a C# dev)](go-observations.md)

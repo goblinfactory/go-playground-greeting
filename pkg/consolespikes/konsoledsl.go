@@ -113,6 +113,22 @@ func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text
 	return left, right, wg, ctx
 }
 
+// SplitLeftRight splits console window and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
+func NewWindow(title string) (*text.Text, *sync.WaitGroup, context.Context) {
+
+	window, _ := text.New(text.RollContent(), text.WrapAtWords())
+
+	layout := container.New(
+		container.Border(linestyle.Light),
+		container.BorderTitleAlignCenter(),
+		container.BorderTitle(leftTitle),
+		container.PlaceWidget(window),
+	)
+
+	wg, ctx := runWindowLayout(layout)
+	return window, right, wg, ctx
+}
+
 // SplitTopBottom splits console window and returns top and bottom windows, a waitgroup and context. Will run until you press q or you call cancel()
 func SplitTopBottom(topTitle string, bottomTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
 
