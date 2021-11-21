@@ -91,8 +91,8 @@ func (c *Konsole) Green(texts ...interface{}) {
 }
 
 // SplitLeftRight splits console window and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
-func SplitLeftRight(leftTitle string, rightTitle string, kb *KeyboardHandlers) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
-
+func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context, *KeyboardHandlers) {
+	kb := NewKBHandler()
 	left, _ := text.New(text.RollContent(), text.WrapAtWords())
 	right, _ := text.New(text.RollContent(), text.WrapAtWords())
 
@@ -111,7 +111,7 @@ func SplitLeftRight(leftTitle string, rightTitle string, kb *KeyboardHandlers) (
 		),
 	)
 	wg, ctx := runWindowLayout(layout, kb)
-	return left, right, wg, ctx
+	return left, right, wg, ctx, kb
 }
 
 // NewWindow ...
@@ -173,8 +173,8 @@ func SplitTopBottom(topTitle string, bottomTitle string, kb *KeyboardHandlers) (
 }
 
 // SplitColumns123 splits console window into 3 columnsw and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
-func SplitColumns123(col1title string, col2title string, col3title string, kb *KeyboardHandlers) (*text.Text, *text.Text, *text.Text, *sync.WaitGroup, context.Context) {
-
+func SplitColumns123(col1title string, col2title string, col3title string) (*text.Text, *text.Text, *text.Text, *sync.WaitGroup, context.Context, *KeyboardHandlers) {
+	kb := NewKBHandler()
 	col1, _ := text.New(text.RollContent(), text.WrapAtWords())
 	col2, _ := text.New(text.RollContent(), text.WrapAtWords())
 	col3, _ := text.New(text.RollContent(), text.WrapAtWords())
@@ -205,7 +205,7 @@ func SplitColumns123(col1title string, col2title string, col3title string, kb *K
 	)
 
 	wg, ctx := runWindowLayout(layout, kb)
-	return col1, col2, col3, wg, ctx
+	return col1, col2, col3, wg, ctx, kb
 }
 
 // SplitColumns1234 splits console window into 3 columnsw and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()

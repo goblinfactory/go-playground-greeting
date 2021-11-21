@@ -38,6 +38,7 @@ func SpikeMinimalHTTPServer() {
 	defer s.Shutdown(ctx)
 
 	go func() {
+
 		fmt.Println("starting server,press q to quit")
 		err := s.ListenAndServe()
 		if err != nil {

@@ -1,5 +1,0 @@
-package consolespikes
-
-// func TestReadingKeysFromTermDash() {
-
-// }

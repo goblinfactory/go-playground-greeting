@@ -13,7 +13,7 @@ import (
 // this shows up as
 func DemoNotSettingChannelToNilCausesALotOfWastedCycles() {
 
-	sc, pc, fc, wg, ctx := consolespikes.SplitColumns123("status", "pressure", "fuel", nil)
+	sc, pc, fc, wg, ctx, _ := consolespikes.SplitColumns123("status", "pressure", "fuel")
 
 	sk := consolespikes.NewKonsole(sc) // status konsole
 	pk := consolespikes.NewKonsole(pc) // pressure konsole
@@ -85,7 +85,7 @@ func FakeReadIODevice(ctx context.Context, wg *sync.WaitGroup, fakereadings []in
 // DemoActuallySettingChannelToNilTurnsOFFTheChannelWithZeroCPUWaste demonstrates how setting a channel to nil in a select causes the channel to be efficiently turned off, avoiding CPU expensive tight polling loops.
 func DemoActuallySettingChannelToNilTurnsOFFTheChannelWithZeroCPUWaste() {
 
-	sc, pc, fc, wg, ctx := consolespikes.SplitColumns123("status", "pressure", "fuel", nil)
+	sc, pc, fc, wg, ctx, _ := consolespikes.SplitColumns123("status", "pressure", "fuel")
 
 	sk := consolespikes.NewKonsole(sc) // status konsole
 	pk := consolespikes.NewKonsole(pc) // pressure konsole

@@ -1,24 +1,12 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/goblinfactory/greeting/pkg/consolespikes"
 )
 
 func main() {
 
-	h := consolespikes.NewKBHandler()
-	fmt.Println("starting")
-	left, right, wg, _ := consolespikes.SplitLeftRight("left", "right", h)
-	h.Handlers['a'] = func() { right.Write("left\n") }
-	h.Handlers['s'] = func() { right.Write("down\n") }
-	h.Handlers['d'] = func() { right.Write("right\n") }
-	h.Handlers['w'] = func() { right.Write("up\n") }
-
-	left.Write("hello world!")
-	wg.Wait()
-
+	consolespikes.SpikeUsingkeyboardHandlers()
 	//controlproducer.DemoConcurrencyLimiter()
 
 	//sandbox2.DemoGatherAndProcess()
