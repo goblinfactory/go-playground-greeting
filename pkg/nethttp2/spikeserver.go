@@ -8,7 +8,8 @@ import (
 	"time"
 )
 
-func SpikeMinimalHttpServer() {
+// SpikeMinimalHTTPServer ...
+func SpikeMinimalHTTPServer() {
 
 	greeter := http.NewServeMux()
 	greeter.HandleFunc("/cat", func(rw http.ResponseWriter, r *http.Request) {
@@ -44,7 +45,6 @@ func SpikeMinimalHttpServer() {
 		}
 	}()
 
-	time.Sleep(5 * time.Second)
 	fmt.Println("closing server")
 	cancel()
 }

@@ -1,10 +1,25 @@
 package main
 
-import "github.com/goblinfactory/greeting/pkg/backpressuredemo/controlproducer"
+import (
+	"fmt"
+
+	"github.com/goblinfactory/greeting/pkg/consolespikes"
+)
 
 func main() {
 
-	controlproducer.DemoConcurrencyLimiter()
+	h := consolespikes.NewKBHandler()
+	fmt.Println("starting")
+	left, right, wg, _ := consolespikes.SplitLeftRight("left", "right", h)
+	h.Handlers['a'] = func() { right.Write("left\n") }
+	h.Handlers['s'] = func() { right.Write("down\n") }
+	h.Handlers['d'] = func() { right.Write("right\n") }
+	h.Handlers['w'] = func() { right.Write("up\n") }
+
+	left.Write("hello world!")
+	wg.Wait()
+
+	//controlproducer.DemoConcurrencyLimiter()
 
 	//sandbox2.DemoGatherAndProcess()
 	//sandbox1.DemoRunOnce()

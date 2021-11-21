@@ -18,7 +18,7 @@ const green = string("\033[32m")
 func DemoConcurrencyLimiter() {
 
 	db := NewFakeDatabase(2)
-	status, c1, c2, c3, wg, ctx := consolespikes.SplitColumns1234("status", "client-1", "client-2", "client-3")
+	status, c1, c2, c3, wg, ctx := consolespikes.SplitColumns1234("status", "client-1", "client-2", "client-3", nil)
 
 	status.Write("starting 3 clients\n")
 

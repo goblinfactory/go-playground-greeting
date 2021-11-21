@@ -9,6 +9,7 @@ import (
 	"github.com/mum4k/termdash"
 	"github.com/mum4k/termdash/cell"
 	"github.com/mum4k/termdash/container"
+	"github.com/mum4k/termdash/keyboard"
 	"github.com/mum4k/termdash/linestyle"
 	"github.com/mum4k/termdash/terminal/tcell"
 	"github.com/mum4k/termdash/terminal/terminalapi"
@@ -35,7 +36,7 @@ func (c *Konsole) WriteLine(texts ...interface{}) {
 		case int:
 			c.con.Write(fmt.Sprintf("%d", t))
 		case string:
-			c.con.Write(fmt.Sprintf("%s", t))
+			c.con.Write(t)
 		default:
 			c.con.Write(fmt.Sprintf("%v", t))
 		}
@@ -52,7 +53,7 @@ func (c *Konsole) Write(texts ...interface{}) {
 		case int:
 			c.con.Write(fmt.Sprintf("%d", t))
 		case string:
-			c.con.Write(fmt.Sprintf("%s", t))
+			c.con.Write(t)
 		default:
 			c.con.Write(fmt.Sprintf("%v", t))
 		}
@@ -76,7 +77,7 @@ func (c *Konsole) writeColor(color cell.Color, texts ...interface{}) {
 		case int:
 			v = fmt.Sprintf("%d", t)
 		case string:
-			v = fmt.Sprintf("%s", t)
+			v = t
 		default:
 			v = fmt.Sprintf("%v", t)
 		}
@@ -90,7 +91,7 @@ func (c *Konsole) Green(texts ...interface{}) {
 }
 
 // SplitLeftRight splits console window and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
-func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+func SplitLeftRight(leftTitle string, rightTitle string, kb *KeyboardHandlers) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
 
 	left, _ := text.New(text.RollContent(), text.WrapAtWords())
 	right, _ := text.New(text.RollContent(), text.WrapAtWords())
@@ -109,28 +110,46 @@ func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text
 			container.PlaceWidget(right),
 		),
 	)
-	wg, ctx := runWindowLayout(layout)
+	wg, ctx := runWindowLayout(layout, kb)
 	return left, right, wg, ctx
 }
 
-// SplitLeftRight splits console window and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
-func NewWindow(title string) (*text.Text, *sync.WaitGroup, context.Context) {
+// NewWindow ...
+func NewWindow(title string, ls linestyle.LineStyle) (*text.Text, *sync.WaitGroup, context.Context) {
 
-	window, _ := text.New(text.RollContent(), text.WrapAtWords())
+	t, err := tcell.New()
+	if err != nil {
+		panic(err)
+	}
+	defer t.Close()
 
-	layout := container.New(
-		container.Border(linestyle.Light),
-		container.BorderTitleAlignCenter(),
-		container.BorderTitle(leftTitle),
-		container.PlaceWidget(window),
+	ctx, cancel := context.WithCancel(context.Background())
+
+	body, err := text.New(text.RollContent(), text.WrapAtWords())
+	if err != nil {
+		panic(err)
+	}
+
+	c, err := container.New(
+		t,
+		container.Border(ls),
+		container.BorderTitle(title),
+		container.PlaceWidget(body),
 	)
+	if err != nil {
+		panic(err)
+	}
 
-	wg, ctx := runWindowLayout(layout)
-	return window, right, wg, ctx
+	var wg sync.WaitGroup
+
+	wg.Add(1)
+	go runTermdashUntilUserPressesQuitKey(ctx, cancel, &wg, c, t, nil)
+	return body, &wg, ctx
+
 }
 
 // SplitTopBottom splits console window and returns top and bottom windows, a waitgroup and context. Will run until you press q or you call cancel()
-func SplitTopBottom(topTitle string, bottomTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+func SplitTopBottom(topTitle string, bottomTitle string, kb *KeyboardHandlers) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
 
 	top, _ := text.New(text.RollContent(), text.WrapAtWords())
 	bottom, _ := text.New(text.RollContent(), text.WrapAtWords())
@@ -149,12 +168,12 @@ func SplitTopBottom(topTitle string, bottomTitle string) (*text.Text, *text.Text
 			container.PlaceWidget(bottom),
 		),
 	)
-	wg, ctx := runWindowLayout(layout)
+	wg, ctx := runWindowLayout(layout, kb)
 	return top, bottom, wg, ctx
 }
 
 // SplitColumns123 splits console window into 3 columnsw and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
-func SplitColumns123(col1title string, col2title string, col3title string) (*text.Text, *text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+func SplitColumns123(col1title string, col2title string, col3title string, kb *KeyboardHandlers) (*text.Text, *text.Text, *text.Text, *sync.WaitGroup, context.Context) {
 
 	col1, _ := text.New(text.RollContent(), text.WrapAtWords())
 	col2, _ := text.New(text.RollContent(), text.WrapAtWords())
@@ -185,12 +204,12 @@ func SplitColumns123(col1title string, col2title string, col3title string) (*tex
 		), container.SplitPercent(33),
 	)
 
-	wg, ctx := runWindowLayout(layout)
+	wg, ctx := runWindowLayout(layout, kb)
 	return col1, col2, col3, wg, ctx
 }
 
 // SplitColumns1234 splits console window into 3 columnsw and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
-func SplitColumns1234(col1title string, col2title string, col3title string, col4title string) (*text.Text, *text.Text, *text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+func SplitColumns1234(col1title string, col2title string, col3title string, col4title string, kb *KeyboardHandlers) (*text.Text, *text.Text, *text.Text, *text.Text, *sync.WaitGroup, context.Context) {
 
 	col1, _ := text.New(text.RollContent(), text.WrapAtWords())
 	col2, _ := text.New(text.RollContent(), text.WrapAtWords())
@@ -232,11 +251,11 @@ func SplitColumns1234(col1title string, col2title string, col3title string, col4
 		),
 	)
 
-	wg, ctx := runWindowLayout(layout)
+	wg, ctx := runWindowLayout(layout, kb)
 	return col1, col2, col3, col4, wg, ctx
 }
 
-func runWindowLayout(layout container.Option) (*sync.WaitGroup, context.Context) {
+func runWindowLayout(layout container.Option, kb *KeyboardHandlers) (*sync.WaitGroup, context.Context) {
 	var wg sync.WaitGroup
 
 	ctx, cancel := context.WithCancel(context.Background())
@@ -254,11 +273,21 @@ func runWindowLayout(layout container.Option) (*sync.WaitGroup, context.Context)
 	}
 
 	wg.Add(1)
-	go runTermdashUntilUserPressesQuitKey(ctx, cancel, &wg, c, t)
+	go runTermdashUntilUserPressesQuitKey(ctx, cancel, &wg, c, t, kb)
 	return &wg, ctx
 }
 
-func runTermdashUntilUserPressesQuitKey(ctx context.Context, cancel context.CancelFunc, wg *sync.WaitGroup, c *container.Container, t *tcell.Terminal) {
+// KeyboardHandlers keystroke handers that will recieve keyboard keypresses
+type KeyboardHandlers struct {
+	Handlers map[keyboard.Key]func()
+}
+
+// NewKBHandler ...
+func NewKBHandler() *KeyboardHandlers {
+	return &KeyboardHandlers{map[keyboard.Key]func(){}}
+}
+
+func runTermdashUntilUserPressesQuitKey(ctx context.Context, cancel context.CancelFunc, wg *sync.WaitGroup, c *container.Container, t *tcell.Terminal, kb *KeyboardHandlers) {
 
 	defer func() {
 		t.Close()
@@ -268,6 +297,14 @@ func runTermdashUntilUserPressesQuitKey(ctx context.Context, cancel context.Canc
 	quitter := func(k *terminalapi.Keyboard) {
 		if k.Key == 'q' || k.Key == 'Q' {
 			cancel()
+			return
+		}
+		if kb != nil && kb.Handlers != nil {
+			h, ok := kb.Handlers[k.Key]
+			if !ok {
+				return
+			}
+			h()
 		}
 	}
 

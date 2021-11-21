@@ -44,7 +44,7 @@ func writeQuotes(ctx context.Context, t *text.Text, delay time.Duration) {
 // TermDashSpike2Columns ..
 func TermDashSpike2Columns() {
 
-	left, right, wg, ctx := SplitLeftRight("LEFTY", "RIGHTY")
+	left, right, wg, ctx := SplitLeftRight("LEFTY", "RIGHTY", nil)
 	left.Write("started\nPress 'q' to quit.\n")
 	go writeQuotes(ctx, right, 1*time.Second)
 
@@ -54,7 +54,7 @@ func TermDashSpike2Columns() {
 // TermDashSpike3Columns ..
 func TermDashSpike3Columns() {
 
-	left, _, right, wg, ctx := SplitColumns123("LEFTY", "MIDDLE", "RIGHTY")
+	left, _, right, wg, ctx := SplitColumns123("LEFTY", "MIDDLE", "RIGHTY", nil)
 	left.Write("started\nPress 'q' to quit.\n")
 	go writeQuotes(ctx, right, 1*time.Second)
 
@@ -65,7 +65,7 @@ func TermDashSpike3Columns() {
 func TermDashSpike4ColumnsRedGreenPrinting() {
 
 	//c1, c2, c3, c4, wg, ctx := SplitColumns1234("LEFT1", "LEFT2", "RIGHT1", "RIGHT2")
-	c1, c2, c3, _, wg, _ := SplitColumns1234("c1", "c2", "c3", "c4")
+	c1, c2, c3, _, wg, _ := SplitColumns1234("c1", "c2", "c3", "c4", nil)
 	c1.Write("started\nPress 'q' to quit.\n")
 	c2.Write("column2\n")
 
@@ -82,14 +82,9 @@ func TermDashSpike4ColumnsRedGreenPrinting() {
 // TermDashSpikeTopBottomLayout ..
 func TermDashSpikeTopBottomLayout() {
 
-	top, bottom, wg, ctx := SplitTopBottom("top", "bottom")
+	top, bottom, wg, ctx := SplitTopBottom("top", "bottom", nil)
 	top.Write("started\nPress 'q' to quit.\n")
 	go writeQuotes(ctx, bottom, 1*time.Second)
 
 	wg.Wait()
 }
-
-// notes, lessons learnt
-// ---------------------
-// afaik, you can't debug termdash apps from vscode, (may be able to via some type of connect to running process)
-// so make sure you can debug and test each dashboard component separately (abstracting out) using termdash write interface.
