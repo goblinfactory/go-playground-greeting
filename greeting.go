@@ -1,12 +1,12 @@
 package main
 
-import (
-	"github.com/goblinfactory/greeting/pkg/consolespikes"
-)
+import "github.com/goblinfactory/greeting/pkg/nethttp2"
 
 func main() {
 
-	consolespikes.SpikeUsingkeyboardHandlers()
+	//consolespikes.WhatHappensIfYouDontClose2()
+	nethttp2.SpikeMinimalHTTPServer()
+	//consolespikes.SpikeUsingkeyboardHandlers()
 	//controlproducer.DemoConcurrencyLimiter()
 
 	//sandbox2.DemoGatherAndProcess()

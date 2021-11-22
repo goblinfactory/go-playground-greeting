@@ -65,6 +65,12 @@ func (c *Konsole) Red(texts ...interface{}) {
 	c.writeColor(cell.ColorRed, texts...)
 }
 
+// RedLine writes texts in red
+func (c *Konsole) RedLine(texts ...interface{}) {
+	c.writeColor(cell.ColorRed, texts...)
+	c.Write("\n")
+}
+
 // Gray writes texts in red
 func (c *Konsole) Gray(texts ...interface{}) {
 	c.writeColor(cell.ColorGray, texts...)
@@ -85,13 +91,19 @@ func (c *Konsole) writeColor(color cell.Color, texts ...interface{}) {
 	}
 }
 
+// GreenLine writes texts in green, ends with a line feed.
+func (c *Konsole) GreenLine(texts ...interface{}) {
+	c.writeColor(cell.ColorGreen, texts...)
+	c.Write("/n")
+}
+
 // Green writes texts in green
 func (c *Konsole) Green(texts ...interface{}) {
 	c.writeColor(cell.ColorGreen, texts...)
 }
 
-// SplitLeftRight splits console window and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
-func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context, *KeyboardHandlers) {
+// SplitLeftRight splits console window and returns left and right windows, a waitgroup and a closer. Will run until you press q or you call close()
+func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context, context.CancelFunc, *KeyboardHandlers) {
 	kb := NewKBHandler()
 	left, _ := text.New(text.RollContent(), text.WrapAtWords())
 	right, _ := text.New(text.RollContent(), text.WrapAtWords())
@@ -110,8 +122,8 @@ func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text
 			container.PlaceWidget(right),
 		),
 	)
-	wg, ctx := runWindowLayout(layout, kb)
-	return left, right, wg, ctx, kb
+	wg, ctx, cancel := runWindowLayout(layout, kb)
+	return left, right, wg, ctx, cancel, kb
 }
 
 // NewWindow ...
@@ -168,7 +180,7 @@ func SplitTopBottom(topTitle string, bottomTitle string, kb *KeyboardHandlers) (
 			container.PlaceWidget(bottom),
 		),
 	)
-	wg, ctx := runWindowLayout(layout, kb)
+	wg, ctx, _ := runWindowLayout(layout, kb)
 	return top, bottom, wg, ctx
 }
 
@@ -204,7 +216,7 @@ func SplitColumns123(col1title string, col2title string, col3title string) (*tex
 		), container.SplitPercent(33),
 	)
 
-	wg, ctx := runWindowLayout(layout, kb)
+	wg, ctx, _ := runWindowLayout(layout, kb)
 	return col1, col2, col3, wg, ctx, kb
 }
 
@@ -251,11 +263,11 @@ func SplitColumns1234(col1title string, col2title string, col3title string, col4
 		),
 	)
 
-	wg, ctx := runWindowLayout(layout, kb)
+	wg, ctx, _ := runWindowLayout(layout, kb)
 	return col1, col2, col3, col4, wg, ctx
 }
 
-func runWindowLayout(layout container.Option, kb *KeyboardHandlers) (*sync.WaitGroup, context.Context) {
+func runWindowLayout(layout container.Option, kb *KeyboardHandlers) (*sync.WaitGroup, context.Context, context.CancelFunc) {
 	var wg sync.WaitGroup
 
 	ctx, cancel := context.WithCancel(context.Background())
@@ -273,18 +285,20 @@ func runWindowLayout(layout container.Option, kb *KeyboardHandlers) (*sync.WaitG
 	}
 
 	wg.Add(1)
+
 	go runTermdashUntilUserPressesQuitKey(ctx, cancel, &wg, c, t, kb)
-	return &wg, ctx
+	return &wg, ctx, cancel
 }
 
 // KeyboardHandlers keystroke handers that will recieve keyboard keypresses
 type KeyboardHandlers struct {
 	Handlers map[keyboard.Key]func()
+	OnQuit   func()
 }
 
 // NewKBHandler ...
 func NewKBHandler() *KeyboardHandlers {
-	return &KeyboardHandlers{map[keyboard.Key]func(){}}
+	return &KeyboardHandlers{map[keyboard.Key]func(){}, nil}
 }
 
 func runTermdashUntilUserPressesQuitKey(ctx context.Context, cancel context.CancelFunc, wg *sync.WaitGroup, c *container.Container, t *tcell.Terminal, kb *KeyboardHandlers) {
@@ -296,6 +310,9 @@ func runTermdashUntilUserPressesQuitKey(ctx context.Context, cancel context.Canc
 
 	quitter := func(k *terminalapi.Keyboard) {
 		if k.Key == 'q' || k.Key == 'Q' {
+			if kb.OnQuit != nil {
+				kb.OnQuit()
+			}
 			cancel()
 			return
 		}
@@ -310,6 +327,6 @@ func runTermdashUntilUserPressesQuitKey(ctx context.Context, cancel context.Canc
 
 	err := termdash.Run(ctx, t, c, termdash.KeyboardSubscriber(quitter))
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 }

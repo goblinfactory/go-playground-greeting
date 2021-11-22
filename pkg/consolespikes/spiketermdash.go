@@ -44,7 +44,7 @@ func writeQuotes(ctx context.Context, t *text.Text, delay time.Duration) {
 // TermDashSpike2Columns ..
 func TermDashSpike2Columns() {
 
-	left, right, wg, ctx, _ := SplitLeftRight("LEFTY", "RIGHTY")
+	left, right, wg, ctx, _, _ := SplitLeftRight("LEFTY", "RIGHTY")
 	left.Write("started\nPress 'q' to quit.\n")
 	go writeQuotes(ctx, right, 1*time.Second)
 
@@ -54,7 +54,7 @@ func TermDashSpike2Columns() {
 // TermDashSpike3Columns ..
 func TermDashSpike3Columns() {
 
-	left, _, right, wg, ctx, _ := SplitColumns123("LEFTY", "MIDDLE", "RIGHTY")
+	left, right, _, wg, ctx, _ := SplitColumns123("LEFTY", "MIDDLE", "RIGHTY")
 	left.Write("started\nPress 'q' to quit.\n")
 	go writeQuotes(ctx, right, 1*time.Second)
 
