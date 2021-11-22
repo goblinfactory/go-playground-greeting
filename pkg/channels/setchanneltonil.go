@@ -13,11 +13,7 @@ import (
 // this shows up as
 func DemoNotSettingChannelToNilCausesALotOfWastedCycles() {
 
-	sc, pc, fc, wg, ctx, _ := consolespikes.SplitColumns123("status", "pressure", "fuel")
-
-	sk := consolespikes.NewKonsole(sc) // status konsole
-	pk := consolespikes.NewKonsole(pc) // pressure konsole
-	fk := consolespikes.NewKonsole(fc) // fuel konsole
+	sk, pk, fk, wg, ctx, _ := consolespikes.SplitColumns123("status", "pressure", "fuel")
 
 	sk.WriteLine("press q to quit.")
 	sk.Gray("(each red asterisks  printed simulate 10 million wasted cpu cycles)")
@@ -85,11 +81,7 @@ func FakeReadIODevice(ctx context.Context, wg *sync.WaitGroup, fakereadings []in
 // DemoActuallySettingChannelToNilTurnsOFFTheChannelWithZeroCPUWaste demonstrates how setting a channel to nil in a select causes the channel to be efficiently turned off, avoiding CPU expensive tight polling loops.
 func DemoActuallySettingChannelToNilTurnsOFFTheChannelWithZeroCPUWaste() {
 
-	sc, pc, fc, wg, ctx, _ := consolespikes.SplitColumns123("status", "pressure", "fuel")
-
-	sk := consolespikes.NewKonsole(sc) // status konsole
-	pk := consolespikes.NewKonsole(pc) // pressure konsole
-	fk := consolespikes.NewKonsole(fc) // fuel konsole
+	sk, pk, fk, wg, ctx, _ := consolespikes.SplitColumns123("status", "pressure", "fuel")
 
 	sk.WriteLine("press q to quit.\n")
 	sk.Gray("If you're reading this wondering what the big deal is, then please run DemoNotSettingChannelToNilCausesALotOfWastedCycles, let the func run for a few seconds and both fuel and pressure IO simulators will stop streaming data, and look at the wasted cpu cycles represented by the red asterisks;\n\n")

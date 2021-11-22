@@ -7,8 +7,6 @@ import (
 	"fmt"
 	"math/rand"
 	"time"
-
-	"github.com/mum4k/termdash/widgets/text"
 )
 
 var quotations = []string{
@@ -28,7 +26,7 @@ var quotations = []string{
 	"If you let my daughter go now, that'll be the end of it. I will not look for you, I will not pursue you. But if you don't, I will look for you, I will find you, and I will kill you.",
 }
 
-func writeQuotes(ctx context.Context, t *text.Text, delay time.Duration) {
+func writeQuotes(ctx context.Context, t Konsole, delay time.Duration) {
 	for {
 		select {
 		case <-ctx.Done():

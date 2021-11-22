@@ -7,23 +7,8 @@ import (
 	"time"
 
 	"github.com/goblinfactory/greeting/pkg/consolespikes"
-	"github.com/mum4k/termdash/widgets/text"
+	"github.com/goblinfactory/greeting/pkg/nethttp2/internal"
 )
-
-// MyConsoleEchoHandler ...
-type MyConsoleEchoHandler struct {
-	con consolespikes.Konsole
-}
-
-func newMyConsoleEchoHandler(con *text.Text) MyConsoleEchoHandler {
-	return MyConsoleEchoHandler{
-		consolespikes.NewKonsole(con),
-	}
-}
-
-func (h *MyConsoleEchoHandler) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
-	h.con.GreenLine(r.RequestURI)
-}
 
 // SpikeMinimalHTTPServer ...
 func SpikeMinimalHTTPServer() {
@@ -35,29 +20,9 @@ func SpikeMinimalHTTPServer() {
 	}
 	log.SetOutput(f)
 
-	_left, right, wg, ctx, cancel, k := consolespikes.SplitLeftRight("server", "requests")
-	left := consolespikes.NewKonsole(_left)
+	left, right, wg, ctx, cancel, k := consolespikes.SplitLeftRight("server", "requests")
 
-	echoHandler := newMyConsoleEchoHandler(right)
-	// greeter := http.NewServeMux()
-
-	// greeter.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
-	// 	right.Write(r.RequestURI)
-	// })
-
-	// greeter.HandleFunc("/cat", func(rw http.ResponseWriter, r *http.Request) {
-	// 	right.Green(r.RequestURI)
-	// 	rw.Write([]byte("Meeoow!\n"))
-	// 	fmt.Println("/cat meeow")
-	// })
-	// greeter.HandleFunc("/dog", func(rw http.ResponseWriter, r *http.Request) {
-	// 	right.Green(r.RequestURI)
-	// 	rw.Write([]byte("Wooof!\n"))
-	// 	fmt.Println("/dog woof")
-	// })
-
-	// mux := http.NewServeMux()
-	// mux.Handle("/greet/", http.StripPrefix("/greet/", greeter))
+	echoHandler := internal.NewMyConsoleEchoHandler(right)
 
 	s := http.Server{
 		Addr:         ":8080",

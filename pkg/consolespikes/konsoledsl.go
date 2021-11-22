@@ -94,7 +94,7 @@ func (c *Konsole) writeColor(color cell.Color, texts ...interface{}) {
 // GreenLine writes texts in green, ends with a line feed.
 func (c *Konsole) GreenLine(texts ...interface{}) {
 	c.writeColor(cell.ColorGreen, texts...)
-	c.Write("/n")
+	c.Write("\n")
 }
 
 // Green writes texts in green
@@ -103,23 +103,26 @@ func (c *Konsole) Green(texts ...interface{}) {
 }
 
 // SplitLeftRight splits console window and returns left and right windows, a waitgroup and a closer. Will run until you press q or you call close()
-func SplitLeftRight(leftTitle string, rightTitle string) (*text.Text, *text.Text, *sync.WaitGroup, context.Context, context.CancelFunc, *KeyboardHandlers) {
+func SplitLeftRight(leftTitle string, rightTitle string) (Konsole, Konsole, *sync.WaitGroup, context.Context, context.CancelFunc, *KeyboardHandlers) {
 	kb := NewKBHandler()
-	left, _ := text.New(text.RollContent(), text.WrapAtWords())
-	right, _ := text.New(text.RollContent(), text.WrapAtWords())
+	_left, _ := text.New(text.RollContent(), text.WrapAtWords())
+	_right, _ := text.New(text.RollContent(), text.WrapAtWords())
+
+	left := NewKonsole(_left)
+	right := NewKonsole(_right)
 
 	layout := container.SplitVertical(
 		container.Left(
 			container.Border(linestyle.Light),
 			container.BorderTitleAlignCenter(),
 			container.BorderTitle(leftTitle),
-			container.PlaceWidget(left),
+			container.PlaceWidget(_left),
 		),
 		container.Right(
 			container.Border(linestyle.Light),
 			container.BorderTitle(rightTitle),
 			container.BorderTitleAlignCenter(),
-			container.PlaceWidget(right),
+			container.PlaceWidget(_right),
 		),
 	)
 	wg, ctx, cancel := runWindowLayout(layout, kb)
@@ -161,7 +164,7 @@ func NewWindow(title string, ls linestyle.LineStyle) (*text.Text, *sync.WaitGrou
 }
 
 // SplitTopBottom splits console window and returns top and bottom windows, a waitgroup and context. Will run until you press q or you call cancel()
-func SplitTopBottom(topTitle string, bottomTitle string, kb *KeyboardHandlers) (*text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+func SplitTopBottom(topTitle string, bottomTitle string, kb *KeyboardHandlers) (Konsole, Konsole, *sync.WaitGroup, context.Context) {
 
 	top, _ := text.New(text.RollContent(), text.WrapAtWords())
 	bottom, _ := text.New(text.RollContent(), text.WrapAtWords())
@@ -181,11 +184,11 @@ func SplitTopBottom(topTitle string, bottomTitle string, kb *KeyboardHandlers) (
 		),
 	)
 	wg, ctx, _ := runWindowLayout(layout, kb)
-	return top, bottom, wg, ctx
+	return NewKonsole(top), NewKonsole(bottom), wg, ctx
 }
 
 // SplitColumns123 splits console window into 3 columnsw and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
-func SplitColumns123(col1title string, col2title string, col3title string) (*text.Text, *text.Text, *text.Text, *sync.WaitGroup, context.Context, *KeyboardHandlers) {
+func SplitColumns123(col1title string, col2title string, col3title string) (Konsole, Konsole, Konsole, *sync.WaitGroup, context.Context, *KeyboardHandlers) {
 	kb := NewKBHandler()
 	col1, _ := text.New(text.RollContent(), text.WrapAtWords())
 	col2, _ := text.New(text.RollContent(), text.WrapAtWords())
@@ -217,7 +220,7 @@ func SplitColumns123(col1title string, col2title string, col3title string) (*tex
 	)
 
 	wg, ctx, _ := runWindowLayout(layout, kb)
-	return col1, col2, col3, wg, ctx, kb
+	return NewKonsole(col1), NewKonsole(col2), NewKonsole(col3), wg, ctx, kb
 }
 
 // SplitColumns1234 splits console window into 3 columnsw and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
