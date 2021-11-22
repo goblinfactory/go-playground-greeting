@@ -1,30 +1,46 @@
 package internal
 
-// import (
-// 	"github.com/goblinfactory/greeting/pkg/consolespikes"
-// 	"github.com/mum4k/termdash/widgets/text"
-// )
+import (
+	"net/http"
 
-// // NewGreeterRouter ...
-// func NewGreeterRouter(con *text.Text) NewServeMux {
+	"github.com/goblinfactory/greeting/pkg/consolespikes"
+)
 
-// 	greeter := http.NewServeMux()
-
-// 	greeter.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
-// 		right.Write(r.RequestURI)
-// 	})
-
-// 	greeter.HandleFunc("/cat", func(rw http.ResponseWriter, r *http.Request) {
-// 		right.Green(r.RequestURI)
-// 		rw.Write([]byte("Meeoow!\n"))
-// 		fmt.Println("/cat meeow")
-// 	})
-// 	greeter.HandleFunc("/dog", func(rw http.ResponseWriter, r *http.Request) {
-// 		right.Green(r.RequestURI)
-// 		rw.Write([]byte("Wooof!\n"))
-// 		fmt.Println("/dog woof")
-// 	})
-
-// 	mux := http.NewServeMux()
-// 	mux.Handle("/greet/", http.StripPrefix("/greet/", greeter))
+// func aboutHandler(w http.ResponseWriter, r *http.Request) {
+// 	w.Write([]byte("<h1>This is the about page</h1>"))
 // }
+
+// NewGreeterMux ...
+func NewGreeterMux(con consolespikes.Konsole) *http.ServeMux {
+
+	con.WriteLine("listening to routes:")
+	con.WriteLine("  /cat/greet")
+	con.WriteLine("  /dog/greet")
+	con.Gray("  /greeter/cat\n")
+	con.Gray("  /dog/greet\n")
+
+	cat := http.NewServeMux()
+
+	cat.HandleFunc("/cat/greet", func(w http.ResponseWriter, r *http.Request) {
+		con.Green(r.RequestURI)
+		w.Write([]byte("Meeoow!\n"))
+	})
+
+	dog := http.NewServeMux()
+
+	dog.HandleFunc("/dog/greet", func(w http.ResponseWriter, r *http.Request) {
+		con.Green(r.RequestURI)
+		w.Write([]byte("Wooof!\n"))
+	})
+
+	mux := http.NewServeMux()
+
+	mux.Handle("/cat/*", cat)
+	mux.Handle("/dog/*", dog)
+
+	// mux.Handle("/cat/", http.StripPrefix("/cat/", cat))
+	// mux.Handle("/dog/", http.StripPrefix("/dog/", dog))
+	return mux
+}
+
+// references : https://www.honeybadger.io/blog/go-web-services/

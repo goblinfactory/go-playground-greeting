@@ -4,8 +4,8 @@ import "github.com/goblinfactory/greeting/pkg/nethttp2"
 
 func main() {
 
-	//consolespikes.WhatHappensIfYouDontClose2()
 	nethttp2.SpikeMinimalHTTPServer()
+	//consolespikes.WhatHappensIfYouDontClose2()
 	//consolespikes.SpikeUsingkeyboardHandlers()
 	//controlproducer.DemoConcurrencyLimiter()
 

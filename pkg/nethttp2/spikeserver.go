@@ -22,14 +22,15 @@ func SpikeMinimalHTTPServer() {
 
 	left, right, wg, ctx, cancel, k := consolespikes.SplitLeftRight("server", "requests")
 
-	echoHandler := internal.NewMyConsoleEchoHandler(right)
+	//echoHandler := internal.NewMyConsoleEchoHandler(right)
+	handler := internal.NewGreeterMux(right)
 
 	s := http.Server{
 		Addr:         ":8080",
-		ReadTimeout:  1 * time.Second,
-		WriteTimeout: 1 * time.Second,
-		IdleTimeout:  10 * time.Second,
-		Handler:      &echoHandler,
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  30 * time.Second,
+		Handler:      handler,
 	}
 
 	defer func() {

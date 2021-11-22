@@ -4,16 +4,16 @@ Collection of small simple experiments in different go language topics. Note, th
 
 -   Best links : start here
 
-    -   [Golang concurrency patterns (talks.golang.org)](https://talks.golang.org/2012/concurrency.slide)
+    -   ↪ [Golang concurrency patterns (talks.golang.org)](https://talks.golang.org/2012/concurrency.slide) 
 
 -   Books & online resources
     -   books
-        -   [Learning Go](https://www.oreilly.com/library/view/learning-go/9781492077206/) _Jon Bodner_
-        -   [Cloud Native Go](https://www.oreilly.com/library/view/cloud-native-go/9781492076322/) _Matthew A. Timus_
-        -   [The Go Programming Language](https://www.pearson.com/us/higher-education/program/Donovan-Go-Programming-Language-The/PGM234922.html) _Alan A.A. Donovan, Brian W. Kerninghan_
-        -   [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/) _Katherine Cox-Buday_
+        -   ↪ [Learning Go](https://www.oreilly.com/library/view/learning-go/9781492077206/) _Jon Bodner_
+        -   ↪ [Cloud Native Go](https://www.oreilly.com/library/view/cloud-native-go/9781492076322/) _Matthew A. Timus_
+        -   ↪ [The Go Programming Language](https://www.pearson.com/us/higher-education/program/Donovan-Go-Programming-Language-The/PGM234922.html) _Alan A.A. Donovan, Brian W. Kerninghan_
+        -   ↪ [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/) _Katherine Cox-Buday_
     -   websites
-        -   https://golangbyexample.com/
+        -   ↪ https://golangbyexample.com/
 -   basic types, enums, datetime
 
     -   [example of consts enums and iota](pkg/erroraddress/erroraddress.go)
@@ -78,7 +78,7 @@ Collection of small simple experiments in different go language topics. Note, th
     -   [wrapping errors](pkg/errorhandling/wrappingerrors.go)
     -   [wrapping errors with defer](pkg/errorhandling/wrappingerrorwithdefer.go)
     -   external links
-        -   []
+        -   [routing](https://www.honeybadger.io/blog/go-web-services/)
 
 -   dependency injection
 
@@ -98,6 +98,8 @@ Collection of small simple experiments in different go language topics. Note, th
 
     -   [http REST calls to json api with json marshalling](pkg/nethttp/nethttp_test.go)
     -   [minimal http 2.0 server](pkg/nethttp/nethttpserver_test.go)
+        - ext links 
+            -   ↪ [routing](https://www.honeybadger.io/blog/go-web-services/)
 
 -   nolinq
 
