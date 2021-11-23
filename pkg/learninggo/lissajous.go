@@ -27,7 +27,11 @@ const (
 )
 
 // LissajousFromArgs creates a random Lissajous animated gif. Try 5, 50, 64, 8, 0.001
-func LissajousFromArgs(args []string) {
+func LissajousFromArgs() {
+	lissajousFromArgs(os.Args[1:])
+}
+
+func lissajousFromArgs(args []string) {
 	path := args[0]
 	cycles, _ := strconv.ParseFloat(args[1], 64)
 	size, _ := strconv.ParseFloat(args[2], 64)
