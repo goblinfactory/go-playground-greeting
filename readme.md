@@ -100,6 +100,8 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
     -   [handling control-c properly](pkg/controlc/controlc.go)
     -   [termdash spike (simple window split left, right)](pkg/consolespikes/spiketermdash.go)
+    -   [usingkeyboardhandlers.go](pkg/consolespikes/usingkeyboardhandlers.go) *simple demo showing how to use my Konsole wrapper around termdash to create a UI + wiring up key event handlers*
+    ![pkg/consolespikes/usingkeyboardhandlers.png](pkg/consolespikes/usingkeyboardhandlers.png)
 
 -   goroutines (threading and async)
 

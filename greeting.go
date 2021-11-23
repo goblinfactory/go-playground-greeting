@@ -15,6 +15,7 @@ import (
 	"github.com/goblinfactory/greeting/pkg/bloggy"
 	"github.com/goblinfactory/greeting/pkg/channels"
 	"github.com/goblinfactory/greeting/pkg/concurrencypatterns"
+	"github.com/goblinfactory/greeting/pkg/consolespikes"
 	"github.com/goblinfactory/greeting/pkg/controlc"
 	"github.com/goblinfactory/greeting/pkg/customcollection"
 	"github.com/goblinfactory/greeting/pkg/dependencyinjection"
@@ -34,6 +35,7 @@ var spikes = []func(){
 
 	// visually rich demos
 	// -------------------
+	consolespikes.SpikeUsingkeyboardHandlers,
 	backpressure.DemoConcurrencyLimiter,
 	nethttp2.SpikeMinimalHTTPServer,
 	channels.DemoNotSettingChannelToNilCausesALotOfWastedCycles,
@@ -43,7 +45,6 @@ var spikes = []func(){
 	// simple demo
 	// ----------
 	// consolespikes.WhatHappensIfYouDontClose2,
-	// consolespikes.SpikeUsingkeyboardHandlers,
 
 	sandbox2.DemoGatherAndProcess,
 	sandbox1.DemoRunOnce,
