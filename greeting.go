@@ -9,11 +9,11 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/goblinfactory/greeting/pkg/ansi"
 	"github.com/goblinfactory/greeting/pkg/arrs"
-	"github.com/goblinfactory/greeting/pkg/backpressuredemo/controlproducer"
+	"github.com/goblinfactory/greeting/pkg/backpressure"
 	"github.com/goblinfactory/greeting/pkg/bloggy"
 	"github.com/goblinfactory/greeting/pkg/channels"
-	"github.com/goblinfactory/greeting/pkg/colors"
 	"github.com/goblinfactory/greeting/pkg/concurrencypatterns"
 	"github.com/goblinfactory/greeting/pkg/controlc"
 	"github.com/goblinfactory/greeting/pkg/customcollection"
@@ -31,14 +31,22 @@ import (
 )
 
 var spikes = []func(){
-	controlproducer.DemoConcurrencyLimiter,
+
+	// visually rich demos
+	// -------------------
+	backpressure.DemoConcurrencyLimiter,
 	nethttp2.SpikeMinimalHTTPServer,
+	channels.DemoNotSettingChannelToNilCausesALotOfWastedCycles,
+	channels.DemoActuallySettingChannelToNilTurnsOFFTheChannelWithZeroCPUWaste,
+	bloggy.DemoCallingAPIsWithCircuitBreaker,
+
+	// simple demo
+	// ----------
 	// consolespikes.WhatHappensIfYouDontClose2,
 	// consolespikes.SpikeUsingkeyboardHandlers,
 
 	sandbox2.DemoGatherAndProcess,
 	sandbox1.DemoRunOnce,
-	channels.DemoActuallySettingChannelToNilTurnsOFFTheChannelWithZeroCPUWaste,
 
 	// consolespikes.TermDashSpike4ColumnsRedGreenPrinting,
 	// consolespikes.TermDashSpike4Columns,
@@ -60,7 +68,6 @@ var spikes = []func(){
 	muxy.RunSpikeGoTerm,
 	testvet.TestThatVetRunsOnSave,
 	testwaitgroup.TestWaitGroup,
-	bloggy.TestQuotes,
 	learninggo.LissajousFromArgs,
 }
 
@@ -71,38 +78,45 @@ func main() {
 	if len(args) == 1 {
 		help()
 		return
-	} else {
-		num, err := strconv.Atoi(args[1])
-		if err != nil {
-			log.Fatal(err)
-		}
-		if num < 0 || num > len(spikes) {
-			log.Fatalf("Test number must be between 0 and %d", len(spikes))
-		}
-		i = num
 	}
+
+	num, err := strconv.Atoi(args[1])
+	if err != nil {
+		log.Fatal(err)
+	}
+	if num < 0 || num > len(spikes) {
+		log.Fatalf("Test number must be between 0 and %d", len(spikes))
+	}
+	i = num
 
 	spikes[i]()
 
 }
 
-// todo : convert to a nice clean window demo with list selector for demos, and run all demos in the "rhs" window.
-// for now, good old fashioned text output.
 func help() {
-	defer fmt.Print(colors.Reset)
+	fmt.Print(ansi.Cls)
+	defer fmt.Print(ansi.Reset)
 	fmt.Println("Alan's Go spikes")
 	fmt.Println("Usage ./greeting {n}  //where n is one of the tests below")
-	fmt.Println("----------------")
 	for i := range spikes {
-		file, line := getFunctionName(spikes[i])
-		fmt.Println("[", colors.Green, i, "]", colors.Reset, file, colors.Yellow, "line", line, colors.Reset)
+		file, name, _ := getFunctionName(spikes[i])
+		file = fmt.Sprintf("%-46s", file)
+		num := fmt.Sprintf("%02d", i)
+		fmt.Println(ansi.Green, num, ansi.Reset, file, ansi.Green, name, ansi.Reset)
 	}
 }
 
-func getFunctionName(i interface{}) (string, int) {
+func getFunctionName(i interface{}) (string, string, int) {
 	p := reflect.ValueOf(i).Pointer()
 	f := runtime.FuncForPC(p)
 	file, line := f.FileLine(p)
 	file = strings.Split(file, "pkg")[1]
-	return file, line
+	ln := f.Name()
+	return file, shortName(ln), line
+}
+
+func shortName(longname string) string {
+	parts := strings.Split(longname, string(os.PathSeparator))
+	sn := parts[len(parts)-1]
+	return strings.Split(sn, ".")[1]
 }

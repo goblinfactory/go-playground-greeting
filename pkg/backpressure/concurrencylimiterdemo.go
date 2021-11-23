@@ -1,4 +1,4 @@
-package controlproducer
+package backpressure
 
 import (
 	"context"

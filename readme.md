@@ -58,7 +58,10 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     -   [signal channels together with waitgroup](pkg/muxyidiomatic/muxyidiomaticwaitgroup.go)
     -   [channels for service status](pkg/channels/servicestatuschannels.go)
     -   [magic numbers in channels](pkg/channels/magicnumberchannel.go)
-    -   [setting a channel to nil to turn channel of and avoid wasting cpu cycles](pkg/channels/setchanneltonil.go)
+    -   [setchanneltonil.go](pkg/channels/setchanneltonil.go) : *setting a channel to nil to turn off a `finished` channel of and avoid wasting cpu cycles*
+    ![setchanneltonil](pkg/channels/setchanneltonil.png)
+    -   [setchanneltonil.go](pkg/channels/setchanneltonil.go) : *NOT setting a channel to nil to turn off a `finished` channel to avoid wasting cpu cycles*
+    ![setchanneltonil](pkg/channels/setchanneltonil2.png)
 
 -   waitgroup
 
@@ -104,12 +107,11 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     -   [BlockingCollection vs channels](pkg/concurrencypatterns/blockingcollectionvschannels.md)
 
 -   net/http
-
+    - ref ↪ [routing](https://www.honeybadger.io/blog/go-web-services/)
     -   [http REST calls to json api with json marshalling](pkg/nethttp/nethttp_test.go)
     -   [spikeserver.go](pkg/nethttp2/spikeserver.go) : *minimal http 2.0 server*
-        - ![spikeserver.png](pkg/nethttp2/spikeserver.png)
-        - ext links 
-            -   ↪ [routing](https://www.honeybadger.io/blog/go-web-services/)
+    ![spikeserver.png](pkg/nethttp2/spikeserver.png)
+    
 
 -   nolinq
 
@@ -122,13 +124,14 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 -   Software patterns
 
     -   [decorator : 3 lines](pkg/decorator/decorator_test.go)
-    -   [circuit breaker : example from 'cloud native go'](pkg/bloggy/breaker/breaker.go)
+    -   [spikequotes.go](pkg/bloggy/breaker/breaker.go) : *DemoCallingAPIsWithCircuitBreaker starts a test quotestream that uses a circuit breaker and `paulbellamy/ratecounter` to limit requests per second*
+        - ![spikequotes.go](pkg/bloggy/spikequotes.png) : 
 -   Patterns - backpressure
     -   [quotes and extracts](pkg/backpressuredemo/readme.md)
     -   [quoteapi.go](pkg/bloggy/quoteapi/quoteapi.go) : *sample quote api using rate limiter return 429 if requests too fast*
-    -   [concurrencylimiterdemo.go](pkg/backpressuredemo/controlproducer/concurrencylimiterdemo.go) : *simple concurrency limiter demo*
-        - ![concurrencylimiterdemo](pkg/backpressuredemo/controlproducer/concurrencylimiterdemo.png)
-        
+    -   [concurrencylimiterdemo.go](pkg/backpressure/concurrencylimiterdemo.go) : *simple concurrency limiter demo*
+        - ![concurrencylimiterdemo](pkg/backpressure/concurrencylimiterdemo.png)
+
 -   Random spikes
 
     -   [test account service](pkg/testaccountservice/testaccountservice.go)

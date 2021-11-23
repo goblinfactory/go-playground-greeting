@@ -9,8 +9,8 @@ import (
 	"github.com/goblinfactory/greeting/pkg/bloggy/quotestream"
 )
 
-// TestQuotes starts a test quotestream that uses a circuit breaker
-func TestQuotes() {
+// DemoCallingAPIsWithCircuitBreaker starts a test quotestream that uses a circuit breaker
+func DemoCallingAPIsWithCircuitBreaker() {
 	fmt.Printf("\nCIRCUIT BREAKER\n")
 	fmt.Printf("---------------\n\n")
 
