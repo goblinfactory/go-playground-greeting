@@ -13,6 +13,7 @@ import (
 	"github.com/goblinfactory/greeting/pkg/backpressuredemo/controlproducer"
 	"github.com/goblinfactory/greeting/pkg/bloggy"
 	"github.com/goblinfactory/greeting/pkg/channels"
+	"github.com/goblinfactory/greeting/pkg/colors"
 	"github.com/goblinfactory/greeting/pkg/concurrencypatterns"
 	"github.com/goblinfactory/greeting/pkg/controlc"
 	"github.com/goblinfactory/greeting/pkg/customcollection"
@@ -85,20 +86,16 @@ func main() {
 
 }
 
-var reset = string("\033[0m")
-var yellow = string("\033[33m")
-var green = string("\033[32m")
-
 // todo : convert to a nice clean window demo with list selector for demos, and run all demos in the "rhs" window.
 // for now, good old fashioned text output.
 func help() {
-	defer fmt.Print(reset)
+	defer fmt.Print(colors.Reset)
 	fmt.Println("Alan's Go spikes")
 	fmt.Println("Usage ./greeting {n}  //where n is one of the tests below")
 	fmt.Println("----------------")
 	for i := range spikes {
 		file, line := getFunctionName(spikes[i])
-		fmt.Println("[", green, i, "]", reset, file, yellow, "line", line, reset)
+		fmt.Println("[", colors.Green, i, "]", colors.Reset, file, colors.Yellow, "line", line, colors.Reset)
 	}
 }
 

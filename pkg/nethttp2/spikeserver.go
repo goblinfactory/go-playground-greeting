@@ -22,12 +22,26 @@ func SpikeMinimalHTTPServer() {
 	left, right, wg, ctx, cancel, k := consolespikes.SplitLeftRight("server", "requests")
 
 	cat := func(w http.ResponseWriter, r *http.Request) {
-		right.Green(r.RequestURI)
+
+		right.Write(time.Now().Format(time.RFC3339))
+		right.Green(" Meeoow! ")
+		right.WriteLine(r.RequestURI)
+
 		w.Write([]byte("Meeoow!\n"))
 	}
 
+	dog := func(w http.ResponseWriter, r *http.Request) {
+
+		right.Write(time.Now().Format(time.RFC3339))
+		right.Green(" Woof!   ")
+		right.WriteLine(r.RequestURI)
+
+		w.Write([]byte("Woof!!\n"))
+	}
+
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", cat)
+	mux.HandleFunc("/cat/", cat)
+	mux.HandleFunc("/dog/", dog)
 
 	s := http.Server{
 		Addr:         ":8080",
@@ -42,7 +56,11 @@ func SpikeMinimalHTTPServer() {
 		s.Shutdown(ctx)
 	}()
 
-	left.Write("starting server,press q to quit\n")
+	left.WriteLine("starting server")
+	left.Gray("listening on port 8080 for http requests\n")
+	left.Gray("/cat/...\n")
+	left.Gray("/dog/...\n")
+	left.WriteLine("press q to quit\n")
 
 	k.OnQuit = func() {
 		log.Printf("Shutting down server")

@@ -31,6 +31,10 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     -   [sorting](pkg/arrs/sorting.go)
     -   [custom collections](pkg/customcollection/stringorintlist.go)
 
+-   formatting
+
+    - [time formatting, example using RFC3339 - `2012-11-23T20:08:41Z`](pkg/nethttp2/spikeserver.go)
+
 -   file IO
 
     -   [read write text files](pkg/fileio/textio/rwbinaryfiles.go)
@@ -103,6 +107,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
     -   [http REST calls to json api with json marshalling](pkg/nethttp/nethttp_test.go)
     -   [minimal http 2.0 server](pkg/nethttp/nethttpserver_test.go)
+        - ![spikeserver.png](pkg/nethttp2/spikeserver.png)
         - ext links 
             -   ↪ [routing](https://www.honeybadger.io/blog/go-web-services/)
 
