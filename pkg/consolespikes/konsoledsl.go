@@ -224,12 +224,17 @@ func SplitColumns123(col1title string, col2title string, col3title string) (Kons
 }
 
 // SplitColumns1234 splits console window into 3 columnsw and returns left and right windows, a waitgroup and a context. Will run until you press q or you call cancel()
-func SplitColumns1234(col1title string, col2title string, col3title string, col4title string, kb *KeyboardHandlers) (*text.Text, *text.Text, *text.Text, *text.Text, *sync.WaitGroup, context.Context) {
+func SplitColumns1234(col1title string, col2title string, col3title string, col4title string) (Konsole, Konsole, Konsole, Konsole, *sync.WaitGroup, context.Context, context.CancelFunc, *KeyboardHandlers) {
+	kb := NewKBHandler()
+	_col1, _ := text.New(text.RollContent(), text.WrapAtWords())
+	_col2, _ := text.New(text.RollContent(), text.WrapAtWords())
+	_col3, _ := text.New(text.RollContent(), text.WrapAtWords())
+	_col4, _ := text.New(text.RollContent(), text.WrapAtWords())
 
-	col1, _ := text.New(text.RollContent(), text.WrapAtWords())
-	col2, _ := text.New(text.RollContent(), text.WrapAtWords())
-	col3, _ := text.New(text.RollContent(), text.WrapAtWords())
-	col4, _ := text.New(text.RollContent(), text.WrapAtWords())
+	col1 := NewKonsole(_col1)
+	col2 := NewKonsole(_col2)
+	col3 := NewKonsole(_col3)
+	col4 := NewKonsole(_col4)
 
 	layout := container.SplitVertical(
 		container.Left(
@@ -238,13 +243,13 @@ func SplitColumns1234(col1title string, col2title string, col3title string, col4
 					container.Border(linestyle.Light),
 					container.BorderTitleAlignCenter(),
 					container.BorderTitle(col1title),
-					container.PlaceWidget(col1),
+					container.PlaceWidget(_col1),
 				),
 				container.Right(
 					container.Border(linestyle.Light),
 					container.BorderTitleAlignCenter(),
 					container.BorderTitle(col2title),
-					container.PlaceWidget(col2),
+					container.PlaceWidget(_col2),
 				),
 			),
 		),
@@ -254,20 +259,20 @@ func SplitColumns1234(col1title string, col2title string, col3title string, col4
 					container.Border(linestyle.Light),
 					container.BorderTitleAlignCenter(),
 					container.BorderTitle(col3title),
-					container.PlaceWidget(col3),
+					container.PlaceWidget(_col3),
 				),
 				container.Right(
 					container.Border(linestyle.Light),
 					container.BorderTitleAlignCenter(),
 					container.BorderTitle(col4title),
-					container.PlaceWidget(col4),
+					container.PlaceWidget(_col4),
 				),
 			),
 		),
 	)
 
-	wg, ctx, _ := runWindowLayout(layout, kb)
-	return col1, col2, col3, col4, wg, ctx
+	wg, ctx, cancel := runWindowLayout(layout, kb)
+	return col1, col2, col3, col4, wg, ctx, cancel, kb
 }
 
 func runWindowLayout(layout container.Option, kb *KeyboardHandlers) (*sync.WaitGroup, context.Context, context.CancelFunc) {

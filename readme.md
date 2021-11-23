@@ -2,6 +2,8 @@
 
 Collection of small simple experiments in different go language topics. Note, these have not been curated or even code reviewed, it's just a random collection of stuff.
 
+Please take any code samples here with a huge pinch of salt. I'm writing these as I learn go, so early spikes will be very naieve, and later ones will hopefully start to show some discipline. This code does not represent code I would write in production, and is just a sandbox to play with. 
+
 -   Best links : start here
 
     -   ↪ [Golang concurrency patterns (talks.golang.org)](https://talks.golang.org/2012/concurrency.slide) 
@@ -14,6 +16,9 @@ Collection of small simple experiments in different go language topics. Note, th
         -   ↪ [Concurrency in Go](https://www.oreilly.com/library/view/concurrency-in-go/9781491941294/) _Katherine Cox-Buday_
     -   websites
         -   ↪ https://golangbyexample.com/
+
+# shortcuts to spikes
+
 -   basic types, enums, datetime
 
     -   [example of consts enums and iota](pkg/erroraddress/erroraddress.go)
@@ -116,7 +121,9 @@ Collection of small simple experiments in different go language topics. Note, th
     -   backpressure
         -   [quotes and extracts](pkg/backpressuredemo/readme.md)
         -   [sample quote api using rate limiter return 429 if requests too fast](pkg/bloggy/quoteapi/quoteapi.go)
-
+        -   [simple concurrency limiter demo](pkg/backpressuredemo/controlproducer/concurrencylimiterdemo.go)
+            - ![concurrencylimiterdemo](pkg/backpressuredemo/controlproducer/concurrencylimiterdemo.png)
+        
 -   Random spikes
 
     -   [test account service](pkg/testaccountservice/testaccountservice.go)
@@ -127,16 +134,21 @@ Collection of small simple experiments in different go language topics. Note, th
 -   Configuring goland first install
 
     ```ruby
-    # paths, imports, lint, shadow
+    # paths, imports, lint, shadow, add to zshrc
     # ----------------------------
     export GOPATH=$HOME/src/go-workspace
     export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+    # run once after go is installed to install go tooling
+    # ----------------------------------------------------
     go install golang.org/x/tools/cmd/goimports@latest
     go install golang.org/x/lint/golint@latest 
     go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
     ```
 
 -   ~/.zshrc settings
+
+Use aliases to create shortcuts to jump to folders.
 
     ```ruby
         alias greet='cd src/go/go-workspace/src/github.com/goblinfactory/go-greet'

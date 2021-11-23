@@ -62,14 +62,13 @@ func TermDashSpike3Columns() {
 // TermDashSpike4ColumnsRedGreenPrinting ..
 func TermDashSpike4ColumnsRedGreenPrinting() {
 
-	//c1, c2, c3, c4, wg, ctx := SplitColumns1234("LEFT1", "LEFT2", "RIGHT1", "RIGHT2")
-	c1, c2, c3, _, wg, _ := SplitColumns1234("c1", "c2", "c3", "c4", nil)
+	//c1, c2, c3, c4, wg, ctx, cancel, kbd
+	c1, c2, c3, _, wg, _, _, _ := SplitColumns1234("c1", "c2", "c3", "c4")
 	c1.Write("started\nPress 'q' to quit.\n")
 	c2.Write("column2\n")
 
-	k := NewKonsole(c2)
-	k.Red("this is red inside ", "the column2\n")
-	k.Green("(success)")
+	c2.Red("this is red inside ", "the column2\n")
+	c2.Green("(success)")
 	c3.Write("column3")
 
 	//go writeQuotes(ctx, c4, 1*time.Second)

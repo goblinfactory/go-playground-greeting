@@ -1,13 +1,12 @@
 package main
 
-import "github.com/goblinfactory/greeting/pkg/nethttp2"
+import "github.com/goblinfactory/greeting/pkg/backpressuredemo/controlproducer"
 
 func main() {
-
-	nethttp2.SpikeMinimalHTTPServer()
+	controlproducer.DemoConcurrencyLimiter()
+	//nethttp2.SpikeMinimalHTTPServer()
 	//consolespikes.WhatHappensIfYouDontClose2()
 	//consolespikes.SpikeUsingkeyboardHandlers()
-	//controlproducer.DemoConcurrencyLimiter()
 
 	//sandbox2.DemoGatherAndProcess()
 	//sandbox1.DemoRunOnce()

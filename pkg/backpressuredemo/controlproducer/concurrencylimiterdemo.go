@@ -6,21 +6,21 @@ import (
 	"time"
 
 	"github.com/goblinfactory/greeting/pkg/consolespikes"
-	"github.com/mum4k/termdash/widgets/text"
 )
-
-const reset = string("\033[0m")
-const red = string("\033[31m")
-const green = string("\033[32m")
 
 // DemoConcurrencyLimiter creates an instance of a fake database, passing in a limiter to limit concurrency to 2 simultaneous requests
 // then shows three goroutines trying to access the database, and shows visually how one of the goroutines blocked while 2 are allowed access.
+// also visually shows how different attempts to "load balance" or manage concurrency can be a lot trickier to achieve expected outcomes.
+// in this demo, we run a concurrency limited that ensure that no more than 2 concurrent requests simultaenously, and see visually that
+// while we are assured no more than 2 requests run at a time, there are often many times when we dont get an even spread of the work
+// and can even have periods where we have multiple requests from all three clients returning 429 at the same time in a row. This is
+// counter intuitive. A really nice example of interesting distributed system choreography. See screenshot.
 func DemoConcurrencyLimiter() {
 
 	db := NewFakeDatabase(2)
-	status, c1, c2, c3, wg, ctx := consolespikes.SplitColumns1234("status", "client-1", "client-2", "client-3", nil)
+	status, c1, c2, c3, wg, ctx, _, _ := consolespikes.SplitColumns1234("status", "client-1", "client-2", "client-3")
 
-	status.Write("starting 3 clients\n")
+	status.Write("starting 3 clients, press 'q' to quit.\n")
 
 	go readWriteDemo(ctx, c1, db, "client1")
 	go readWriteDemo(ctx, c2, db, "client2")
@@ -28,8 +28,7 @@ func DemoConcurrencyLimiter() {
 	wg.Wait()
 }
 
-func readWriteDemo(ctx context.Context, con *text.Text, db FakeDatabase, name string) {
-	k := consolespikes.NewKonsole(con)
+func readWriteDemo(ctx context.Context, k consolespikes.Konsole, db FakeDatabase, name string) {
 	i := 0
 	k.WriteLine("starting ", name)
 	for {
@@ -43,7 +42,7 @@ func readWriteDemo(ctx context.Context, con *text.Text, db FakeDatabase, name st
 			_, err := db.AddCustomer(cid, FakeCustomer{})
 			if err != nil {
 				k.Red(err.Error(), "\n")
-				time.Sleep(200 * time.Millisecond)
+				time.Sleep(20 * time.Millisecond)
 			} else {
 				k.Green(cid, "write ok\n")
 			}

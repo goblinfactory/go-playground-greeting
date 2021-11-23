@@ -10,6 +10,6 @@ List of strange issues I encountered that are not described in the package libs 
 
 -   then the possible root causes to investigate are:
 
-    1. failure to properly use the control+c pattern. (to add to konsoleDSL)
-
-and the fix is:
+    1. Failure to properly use the control+c pattern. (todo, need to add to konsoleDSL)
+    2. Not closing the terminal properly. Overriding or stopping the default built in 'q' to quit code in consoleDSL spike.
+    3. Creating a new context and not re-using the supplied (returned) ctx.

@@ -13,34 +13,32 @@ import (
 // NewGreeterMux ...
 func NewGreeterMux(con consolespikes.Konsole) *http.ServeMux {
 
-	con.WriteLine("listening to routes:")
-	con.WriteLine("  /cat/greet")
-	con.WriteLine("  /dog/greet")
-	con.Gray("  /greeter/cat\n")
-	con.Gray("  /dog/greet\n")
+	// con.WriteLine("listening to routes:")
+	// con.WriteLine("  /cat/greet")
+	// con.WriteLine("  /dog/greet")
+	// con.Gray("  /greeter/cat\n")
+	// con.Gray("  /dog/greet\n")
 
-	cat := http.NewServeMux()
+	// func catHandler(w http.ResponseWriter, r *http.Request) {
+	// 	con.Green(r.RequestURI)
+	// 	w.Write([]byte("Meeoow!\n"))
+	// }
 
-	cat.HandleFunc("/cat/greet", func(w http.ResponseWriter, r *http.Request) {
-		con.Green(r.RequestURI)
-		w.Write([]byte("Meeoow!\n"))
-	})
+	// // dog := http.NewServeMux()
 
-	dog := http.NewServeMux()
+	// // dog.HandleFunc("/dog", func(w http.ResponseWriter, r *http.Request) {
+	// // 	con.Green(r.RequestURI)
+	// // 	w.Write([]byte("Wooof!\n"))
+	// // })
 
-	dog.HandleFunc("/dog/greet", func(w http.ResponseWriter, r *http.Request) {
-		con.Green(r.RequestURI)
-		w.Write([]byte("Wooof!\n"))
-	})
+	// mux := http.NewServeMux()
 
-	mux := http.NewServeMux()
+	// // mux.Handle("/greet/cat/1", http.StripPrefix("/greet/", cat))
+	// // mux.Handle("/greet/dog/1", http.StripPrefix("/greet/", dog))
 
-	mux.Handle("/cat/*", cat)
-	mux.Handle("/dog/*", dog)
+	// mux.Handle("/cat", cat)
 
-	// mux.Handle("/cat/", http.StripPrefix("/cat/", cat))
-	// mux.Handle("/dog/", http.StripPrefix("/dog/", dog))
-	return mux
+	return nil
 }
 
 // references : https://www.honeybadger.io/blog/go-web-services/

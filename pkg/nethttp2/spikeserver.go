@@ -7,7 +7,6 @@ import (
 	"time"
 
 	"github.com/goblinfactory/greeting/pkg/consolespikes"
-	"github.com/goblinfactory/greeting/pkg/nethttp2/internal"
 )
 
 // SpikeMinimalHTTPServer ...
@@ -22,15 +21,20 @@ func SpikeMinimalHTTPServer() {
 
 	left, right, wg, ctx, cancel, k := consolespikes.SplitLeftRight("server", "requests")
 
-	//echoHandler := internal.NewMyConsoleEchoHandler(right)
-	handler := internal.NewGreeterMux(right)
+	cat := func(w http.ResponseWriter, r *http.Request) {
+		right.Green(r.RequestURI)
+		w.Write([]byte("Meeoow!\n"))
+	}
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", cat)
 
 	s := http.Server{
 		Addr:         ":8080",
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  30 * time.Second,
-		Handler:      handler,
+		Handler:      mux,
 	}
 
 	defer func() {
@@ -46,8 +50,10 @@ func SpikeMinimalHTTPServer() {
 		cancel()
 	}
 
-	log.Printf("server started.")
+	log.Printf("server starting.")
+
 	err = s.ListenAndServe()
+
 	if err != nil {
 		left.Red(err)
 		if err != http.ErrServerClosed {
