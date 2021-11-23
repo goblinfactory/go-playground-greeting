@@ -106,7 +106,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 -   net/http
 
     -   [http REST calls to json api with json marshalling](pkg/nethttp/nethttp_test.go)
-    -   [minimal http 2.0 server](pkg/nethttp/nethttpserver_test.go)
+    -   [spikeserver.go](pkg/nethttp2/spikeserver.go) : *minimal http 2.0 server*
         - ![spikeserver.png](pkg/nethttp2/spikeserver.png)
         - ext links 
             -   ↪ [routing](https://www.honeybadger.io/blog/go-web-services/)
@@ -123,11 +123,11 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
     -   [decorator : 3 lines](pkg/decorator/decorator_test.go)
     -   [circuit breaker : example from 'cloud native go'](pkg/bloggy/breaker/breaker.go)
-    -   backpressure
-        -   [quotes and extracts](pkg/backpressuredemo/readme.md)
-        -   [sample quote api using rate limiter return 429 if requests too fast](pkg/bloggy/quoteapi/quoteapi.go)
-        -   [simple concurrency limiter demo](pkg/backpressuredemo/controlproducer/concurrencylimiterdemo.go)
-            - ![concurrencylimiterdemo](pkg/backpressuredemo/controlproducer/concurrencylimiterdemo.png)
+-   Patterns - backpressure
+    -   [quotes and extracts](pkg/backpressuredemo/readme.md)
+    -   [quoteapi.go](pkg/bloggy/quoteapi/quoteapi.go) : *sample quote api using rate limiter return 429 if requests too fast*
+    -   [concurrencylimiterdemo.go](pkg/backpressuredemo/controlproducer/concurrencylimiterdemo.go) : *simple concurrency limiter demo*
+        - ![concurrencylimiterdemo](pkg/backpressuredemo/controlproducer/concurrencylimiterdemo.png)
         
 -   Random spikes
 
@@ -149,6 +149,10 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     go install golang.org/x/tools/cmd/goimports@latest
     go install golang.org/x/lint/golint@latest 
     go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
+
+    # vscode editor settings
+    # ----------------------
+    indenting : workbench, tree indent. set this to max `40` depending on screen.
     ```
 
 -   ~/.zshrc settings
