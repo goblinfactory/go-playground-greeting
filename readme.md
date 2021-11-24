@@ -123,9 +123,9 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
     -   [no linq](pkg/nolinq/nolinq.go) : *Demonstrate basic `where`, `and`, `or` object querying without using a third party linq type library.*
 
--   pseudo linq
+-   manually writing linq like helpers
 
-    -   [suffix](pkg/pseudolinq/suffix.go)
+    -   [suffix](pkg/pseudolinq/suffix_test.go) : *test showing a custom linq like extension `mystrings.Suffix('.txt')` adding a `.txt` suffix to an array of strings*
 
 -   Software patterns
 
