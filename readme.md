@@ -64,7 +64,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     -   [magic numbers in channels](pkg/channels/magicnumberchannel.go)
     -   [setchanneltonil.go](pkg/channels/setchanneltonil.go) : *setting a channel to nil to turn off a `finished` channel of and avoid wasting cpu cycles*
     ![setchanneltonil](pkg/channels/setchanneltonil.png)
-    -   [setchanneltonil.go](pkg/channels/setchanneltonil.go) : *NOT setting a channel to nil to turn off a `finished` channel to avoid wasting cpu cycles*
+    -   [setchanneltonil.go](pkg/channels/setchanneltonil.go) : *demo shows how NOT setting a channel to nil to turn off a `finished` channel causes select to spin (polling) and waste a huge amount of cpu cycles, i.e. very bad! dont do this!*
     ![setchanneltonil](pkg/channels/setchanneltonil2.png)
 
 -   waitgroup
