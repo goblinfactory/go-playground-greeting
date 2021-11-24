@@ -52,7 +52,8 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
 -   channels and concurrency
 
-    -   [buffered channels example showing concurrently calling microservice and returning results via a buffered channel](pkg/channels/bufferedchannels.go)
+    -   [bufferedchannels.go](pkg/channels/bufferedchannels.go) : *example concurrently calling microservice and returning results via a buffered channel*
+    ![pkg/channels/bufferedchannels](pkg/channels/bufferedchannels.png)
     -   [channels can be constrained as read-only or write-only](pkg/concurrencypatterns/directionalchannels.go)
     -   [use cancel function instead of signal channel to cancel long running goroutines](pkg/concurrencypatterns/cancelfunction.go)
     -   [demo showing how deadlock can occur](pkg/concurrencypatterns/sampledeadlock.go)
@@ -117,6 +118,9 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     -   [http REST calls to json api with json marshalling](pkg/nethttp/nethttp_test.go)
     -   [spikeserver.go](pkg/nethttp2/spikeserver.go) : *minimal http 2.0 server*
     ![spikeserver.png](pkg/nethttp2/spikeserver.png)
+    -   [spikeserver.go](pkg/nethttp2/serverwithmiddlewarelogging.go) : *minimal http 2.0 server with middleware and mux routing*
+    ![spikeserver.png](pkg/nethttp2/serverwithmiddlewarelogging.png)
+    
     
 
 -   nolinq

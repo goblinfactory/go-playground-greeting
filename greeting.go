@@ -41,6 +41,7 @@ var spikes = []func(){
 	nethttp2.SpikeMinimalHTTPServer,
 	channels.DemoNotSettingChannelToNilCausesALotOfWastedCycles,
 	channels.DemoActuallySettingChannelToNilTurnsOFFTheChannelWithZeroCPUWaste,
+	channels.DemoBufferedChannels,
 	bloggy.DemoCallingAPIsWithCircuitBreaker,
 	consolespikes.WhatHappensIfYouDontCloseTerminal,
 
