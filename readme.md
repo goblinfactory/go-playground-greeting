@@ -121,7 +121,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
 -   nolinq
 
-    -   [no linq](pkg/nolinq/nolinq.go)
+    -   [no linq](pkg/nolinq/nolinq.go) : *Demonstrate basic `where`, `and`, `or` object querying without using a third party linq type library.*
 
 -   pseudo linq
 
