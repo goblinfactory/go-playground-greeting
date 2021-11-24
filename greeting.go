@@ -96,15 +96,25 @@ func main() {
 
 func help() {
 	fmt.Print(ansi.Cls)
+	richDemos := 4
 	defer fmt.Print(ansi.Reset)
 	fmt.Println("Alan's Go spikes")
 	fmt.Println("Usage ./greeting {n}  //where n is one of the tests below")
+	fmt.Println("Gray demos dont output much visually. Source is best place to look.")
+	fmt.Println("")
 	for i := range spikes {
+
 		file, name, _ := getFunctionName(spikes[i])
 		file = fmt.Sprintf("%-46s", file)
 		num := fmt.Sprintf("%02d", i)
-		fmt.Println(ansi.Green, num, ansi.Reset, file, ansi.Green, name, ansi.Reset)
+		if i > richDemos {
+			// display the non rich demos in dark yellow
+			fmt.Println(ansi.Gray, num+" ", file, " "+name, ansi.Reset)
+		} else {
+			fmt.Println(ansi.Green, num, ansi.Reset, file, ansi.Green, name, ansi.Reset)
+		}
 	}
+	fmt.Println("")
 }
 
 func getFunctionName(i interface{}) (string, string, int) {

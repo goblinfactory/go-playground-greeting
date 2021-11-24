@@ -33,7 +33,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
 -   formatting
 
-    - [time formatting, example using RFC3339 - `2012-11-23T20:08:41Z`](pkg/nethttp2/spikeserver.go)
+    - [time formatting, example using RFC3339](pkg/nethttp2/spikeserver.go) : *this example logs http requests to console with RFC3339 format i.e. `2012-11-23T20:08:41Z`*
 
 -   file IO
 
