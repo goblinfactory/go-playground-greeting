@@ -23,6 +23,7 @@ import (
 	"github.com/goblinfactory/greeting/pkg/learninggo"
 	"github.com/goblinfactory/greeting/pkg/muxy"
 	"github.com/goblinfactory/greeting/pkg/nethttp2"
+	"github.com/goblinfactory/greeting/pkg/nolinq"
 	"github.com/goblinfactory/greeting/pkg/sandboxes/sandbox1"
 	"github.com/goblinfactory/greeting/pkg/sandboxes/sandbox2"
 	"github.com/goblinfactory/greeting/pkg/switchy"
@@ -41,16 +42,15 @@ var spikes = []func(){
 	channels.DemoNotSettingChannelToNilCausesALotOfWastedCycles,
 	channels.DemoActuallySettingChannelToNilTurnsOFFTheChannelWithZeroCPUWaste,
 	bloggy.DemoCallingAPIsWithCircuitBreaker,
+	consolespikes.WhatHappensIfYouDontCloseTerminal,
 
-	// simple demo
-	// ----------
-	// consolespikes.WhatHappensIfYouDontClose2,
-
+	// simple demos
+	// -----------
+	nolinq.DemoQueryingObjectsAndCollectionsWithoutLinq,
 	sandbox2.DemoGatherAndProcess,
 	sandbox1.DemoRunOnce,
 
-	// consolespikes.TermDashSpike4ColumnsRedGreenPrinting,
-	// consolespikes.TermDashSpike4Columns,
+	consolespikes.TermDashSpike4ColumnsRedGreenPrinting,
 	concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators,
 	errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType,
 	errorhandling.Demo1,
@@ -69,7 +69,6 @@ var spikes = []func(){
 	muxy.RunSpikeGoTerm,
 	testvet.TestThatVetRunsOnSave,
 	testwaitgroup.TestWaitGroup,
-	learninggo.LissajousFromArgs,
 }
 
 func main() {
@@ -96,7 +95,7 @@ func main() {
 
 func help() {
 	fmt.Print(ansi.Cls)
-	richDemos := 4
+	richDemos := 7
 	defer fmt.Print(ansi.Reset)
 	fmt.Println("Alan's Go spikes")
 	fmt.Println("Usage ./greeting {n}  //where n is one of the tests below")
@@ -107,7 +106,7 @@ func help() {
 		file, name, _ := getFunctionName(spikes[i])
 		file = fmt.Sprintf("%-46s", file)
 		num := fmt.Sprintf("%02d", i)
-		if i > richDemos {
+		if i+1 > richDemos {
 			// display the non rich demos in dark yellow
 			fmt.Println(ansi.Gray, num+" ", file, " "+name, ansi.Reset)
 		} else {

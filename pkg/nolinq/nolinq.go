@@ -10,8 +10,8 @@ type car struct {
 
 type garage []car
 
-// Main tests raw Go instead of Linq.
-func Main() {
+// DemoQueryingObjectsAndCollectionsWithoutLinq tests raw Go instead of Linq.
+func DemoQueryingObjectsAndCollectionsWithoutLinq() {
 
 	var cars = []car{
 		{1950, "Jay Leno", "buic", "red", 1},

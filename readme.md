@@ -2,6 +2,10 @@
 
 Collection of small simple experiments in different go language topics. Note, these have not been curated or even code reviewed, it's just a random collection of stuff.
 
+To run the sample, git clone the project, and then run `go run greeting.go` you will see the following list of demos and spikes; pick a demo and run it as per instructions
+
+![greeting.png](greeting.png)
+
 Please take any code samples here with a huge pinch of salt. I'm writing these as I learn go, so early spikes will be very naieve, and later ones will hopefully start to show some discipline. This code does not represent code I would write in production, and is just a sandbox to play with. 
 
 -   Best links : start here
