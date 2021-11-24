@@ -131,12 +131,13 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
     -   [decorator : 3 lines](pkg/decorator/decorator_test.go)
     -   [spikequotes.go](pkg/bloggy/breaker/breaker.go) : *DemoCallingAPIsWithCircuitBreaker starts a test quotestream that uses a circuit breaker and `paulbellamy/ratecounter` to limit requests per second*
-        - ![spikequotes.go](pkg/bloggy/spikequotes.png) : 
+    ![spikequotes.go](pkg/bloggy/spikequotes.png)
+
 -   Patterns - backpressure
     -   [quotes and extracts](pkg/backpressuredemo/readme.md)
     -   [quoteapi.go](pkg/bloggy/quoteapi/quoteapi.go) : *sample quote api using rate limiter return 429 if requests too fast*
     -   [concurrencylimiterdemo.go](pkg/backpressure/concurrencylimiterdemo.go) : *simple concurrency limiter demo*
-        - ![concurrencylimiterdemo](pkg/backpressure/concurrencylimiterdemo.png)
+    ![concurrencylimiterdemo](pkg/backpressure/concurrencylimiterdemo.png)
 
 -   Random spikes
 
