@@ -102,6 +102,33 @@ func (c *Konsole) Green(texts ...interface{}) {
 	c.writeColor(cell.ColorGreen, texts...)
 }
 
+// NewWindow ...
+func NewWindow(title string, ls linestyle.LineStyle) (Konsole, *sync.WaitGroup, context.Context, context.CancelFunc, *KeyboardHandlers) {
+	kb := NewKBHandler()
+	_window, _ := text.New(text.RollContent(), text.WrapAtWords())
+
+	t, err1 := tcell.New()
+
+	if err1 != nil {
+		log.Fatal(err1)
+	}
+
+	window := NewKonsole(_window)
+
+	c, err := container.New(t,
+		container.Border(ls),
+		container.BorderTitleAlignCenter(),
+		container.BorderTitle(title),
+		container.PlaceWidget(_window),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	wg, ctx, cancel := runWindowContainer(c, t, kb)
+	return window, wg, ctx, cancel, kb
+}
+
 // SplitLeftRight splits console window and returns left and right windows, a waitgroup and a closer. Will run until you press q or you call close()
 func SplitLeftRight(leftTitle string, rightTitle string) (Konsole, Konsole, *sync.WaitGroup, context.Context, context.CancelFunc, *KeyboardHandlers) {
 	kb := NewKBHandler()
@@ -127,40 +154,6 @@ func SplitLeftRight(leftTitle string, rightTitle string) (Konsole, Konsole, *syn
 	)
 	wg, ctx, cancel := runWindowLayout(layout, kb)
 	return left, right, wg, ctx, cancel, kb
-}
-
-// NewWindow ...
-func NewWindow(title string, ls linestyle.LineStyle) (*text.Text, *sync.WaitGroup, context.Context) {
-
-	t, err := tcell.New()
-	if err != nil {
-		panic(err)
-	}
-	defer t.Close()
-
-	ctx, cancel := context.WithCancel(context.Background())
-
-	body, err := text.New(text.RollContent(), text.WrapAtWords())
-	if err != nil {
-		panic(err)
-	}
-
-	c, err := container.New(
-		t,
-		container.Border(ls),
-		container.BorderTitle(title),
-		container.PlaceWidget(body),
-	)
-	if err != nil {
-		panic(err)
-	}
-
-	var wg sync.WaitGroup
-
-	wg.Add(1)
-	go runTermdashUntilUserPressesQuitKey(ctx, cancel, &wg, c, t, nil)
-	return body, &wg, ctx
-
 }
 
 // SplitTopBottom splits console window and returns top and bottom windows, a waitgroup and context. Will run until you press q or you call cancel()
@@ -291,6 +284,17 @@ func runWindowLayout(layout container.Option, kb *KeyboardHandlers) (*sync.WaitG
 	if err2 != nil {
 		log.Fatal(err2)
 	}
+
+	wg.Add(1)
+
+	go runTermdashUntilUserPressesQuitKey(ctx, cancel, &wg, c, t, kb)
+	return &wg, ctx, cancel
+}
+
+func runWindowContainer(c *container.Container, t *tcell.Terminal, kb *KeyboardHandlers) (*sync.WaitGroup, context.Context, context.CancelFunc) {
+	var wg sync.WaitGroup
+
+	ctx, cancel := context.WithCancel(context.Background())
 
 	wg.Add(1)
 

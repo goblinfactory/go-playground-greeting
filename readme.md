@@ -104,7 +104,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
     -   [handling control-c properly](pkg/controlc/controlc.go)
     -   [termdash spike (simple window split left, right)](pkg/consolespikes/spiketermdash.go)
-    -   [usingkeyboardhandlers.go](pkg/consolespikes/usingkeyboardhandlers.go) *simple demo showing how to use my Konsole wrapper around termdash to create a UI + wiring up key event handlers*
+    -   [usingkeyboardhandlers.go](pkg/consolespikes/usingkeyboardhandlers.go) : *simple demo showing how to use my Konsole wrapper around termdash to create a UI + wiring up key event handlers*
     ![pkg/consolespikes/usingkeyboardhandlers.png](pkg/consolespikes/usingkeyboardhandlers.png)
 
 -   goroutines (threading and async)
@@ -121,15 +121,12 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
 -   nolinq
 
-    -   [no linq](pkg/nolinq/nolinq.go) : *Demonstrate basic `where`, `and`, `or` object querying without using a third party linq type library.*
-
--   manually writing linq like helpers
-
+    -   [no linq](pkg/nolinq/nolinq.go) : *demonstrate basic `where`, `and`, `or` object querying without using a third party linq type library.*
     -   [suffix](pkg/pseudolinq/suffix_test.go) : *test showing a custom linq like extension `mystrings.Suffix('.txt')` adding a `.txt` suffix to an array of strings*
 
 -   Software patterns
 
-    -   [decorator : 3 lines](pkg/decorator/decorator_test.go)
+    -   [decorator : 3 lines](pkg/decorator/decorator_test.go) : *adding a decorator to a method in 3 lines of code*
     -   [spikequotes.go](pkg/bloggy/breaker/breaker.go) : *DemoCallingAPIsWithCircuitBreaker starts a test quotestream that uses a circuit breaker and `paulbellamy/ratecounter` to limit requests per second*
     ![spikequotes.go](pkg/bloggy/spikequotes.png)
 

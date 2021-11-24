@@ -58,17 +58,15 @@ var spikes = []func(){
 	dependencyinjection.Main,
 	customcollection.Demo,
 	learninggo.TestEmbeddingAndComposition,
-	// book1section1.FindDuplicateLines,
 	timing.CompareConcatVsJoin,
-	// commandline.Echo,
 	switchy.TestSwitchy,
-	// structs.TestMaps,
 	controlc.TestControlC,
 	arrs.TestSlicesArePassedByCopy,
 	arrs.TestSorting,
 	muxy.RunSpikeGoTerm,
 	testvet.TestThatVetRunsOnSave,
 	testwaitgroup.TestWaitGroup,
+	nethttp2.DemoServerWithLoggingMiddleware,
 }
 
 func main() {

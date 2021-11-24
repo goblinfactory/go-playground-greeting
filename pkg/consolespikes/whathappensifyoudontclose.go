@@ -1,6 +1,8 @@
 package consolespikes
 
-import "time"
+import (
+	"time"
+)
 
 // WhatHappensIfYouDontCloseTerminal tests what happens to a full screen terminal if you don't dispose(close) the (t)erminal properly when finished
 func WhatHappensIfYouDontCloseTerminal() {
@@ -14,7 +16,7 @@ func WhatHappensIfYouDontCloseTerminal() {
 func CorrectWayToCloseTerminal() {
 	left, right, wg, _, cancel, _ := SplitLeftRight("server", "requests")
 
-	left.Write("this demo pausing for 3 seconds then closes. What happens is there are goroutines that will be left running that will capture mouse events and convert them to ansi codes that you will see in the main console. Move your mouse over the console to see the result.")
+	left.Write("this demo pausing for 3 seconds then closes. After it closes if you move your mouse over teh console it will not be corrupted.")
 	right.Write("right window here")
 	time.Sleep(3 * time.Second)
 
