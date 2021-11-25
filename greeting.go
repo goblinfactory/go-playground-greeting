@@ -94,7 +94,7 @@ func main() {
 
 func help() {
 	fmt.Print(ansi.Cls)
-	richDemos := 7
+	richDemos := 8
 	defer fmt.Print(ansi.Reset)
 	fmt.Println("Alan's Go spikes")
 	fmt.Println("Usage ./greeting {n}  //where n is one of the tests below")

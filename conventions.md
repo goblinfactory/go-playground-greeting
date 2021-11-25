@@ -9,5 +9,8 @@
     -   Do not indent main logic flow
 1.  return values
     -   `Comma` `ok` idiom. (return value + command + a boolean named ok)
+    -   most often return a concrete type from a function.
 1.  type switching
     -   assign variable being switch to same name to shadow variable with more strongly typed object.
+1. Context
+    -   always passed as first parameter    
