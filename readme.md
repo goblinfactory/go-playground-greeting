@@ -87,10 +87,6 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
     -   [context with cancel example](pkg/spikequotes/bloggy.go)
 
--   graphics
-
-    -   [Lissajous animated gif generator (from Learning Go book)](pkg/learninggo/lissajous.go)
-
 -   error handling
 
     -   [typical error handling](pkg/errorhandling/errorhandling.go)
