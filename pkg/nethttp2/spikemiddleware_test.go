@@ -38,7 +38,9 @@ func TestCreatingOurOwnHandler(t *testing.T) {
 func applyMiddelware(hw *HistoryWriter) func(http.Handler) http.Handler { // this gives us access to historyWriter via closure
 	return func(h http.Handler) http.Handler { // this gives us access to h.Serve in the closure
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { // this gives us access to the request in the closure
-			// capture the bytes written
+
+			// capture the bytes written by calling serveHTTP passing in
+			// our fake responseWriter
 			h.ServeHTTP(hw, r)
 			// render the bytes we want displayed - full history (record of all requests)
 			// this is because we want to see the count down the seconds left during each http request.
@@ -47,3 +49,6 @@ func applyMiddelware(hw *HistoryWriter) func(http.Handler) http.Handler { // thi
 		})
 	}
 }
+
+// in english ... the above reads as ?
+// a history writer middle ware factory, that returns a handler that when called returns a handlerFunc of the required middleware code
