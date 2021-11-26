@@ -92,6 +92,11 @@ func main() {
 
 }
 
+// // CommentsMissing ..
+// func CommentsMissing() {
+// 	fmt.Pr("asdasd")
+// }
+
 func help() {
 	fmt.Print(ansi.Cls)
 	richDemos := 8

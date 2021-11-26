@@ -36,6 +36,8 @@ func SpikeMinimalHTTPServer() {
 		right.Green(" Woof!   ")
 		right.WriteLine(r.RequestURI)
 
+		// dogs are slower than cats
+		time.Sleep(5 * time.Second)
 		w.Write([]byte("Woof!!\n"))
 	}
 
