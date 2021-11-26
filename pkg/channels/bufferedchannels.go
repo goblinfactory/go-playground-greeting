@@ -11,6 +11,10 @@ import (
 // DemoBufferedChannels shows an example of using a buffered channel to make concurrent calls to a micro-service
 func DemoBufferedChannels() {
 
+	fmt.Println("Spike demonstrates consuming the feed before all the results are ready")
+	fmt.Println("and the services then completing before the whole feed is processed.")
+	fmt.Println("")
+
 	products := []string{
 		"kbd-01",
 		"kbd-02",
@@ -75,10 +79,11 @@ func lookupProductWeight(productID string) float64 {
 }
 
 /*
-spike demonstrates consuming the feed before all the results are ready
-and the services then completing before the whole feed is processed.
 
 Running above code produces
+
+spike demonstrates consuming the feed before all the results are ready
+and the services then completing before the whole feed is processed.
 
 kbd-01 - 1.94kg 	:   81ms
 hea-72 - 10.30kg 	:  203ms
