@@ -39,20 +39,3 @@ func TestAddingCustomTypesTogether(t *testing.T) {
 	assert.Equal(t, MyInt(20), i20)
 
 }
-
-// func TestIfTimeAfterRunsOnlyOnceOrEveryLoop2(t *testing.T) {
-// 	i := 0
-// 	for {
-// 		select {
-// 		case <-time.After(time.Second * 1):
-// 			i++
-// 			if i > 4 {
-// 				return
-// 			}
-// 			fmt.Printf("tick %d\n", i)
-// 		case <-time.After(time.Second * 2):
-// 			fmt.Println("stopping")
-// 			return
-// 		}
-// 	}
-// }
