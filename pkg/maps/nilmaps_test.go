@@ -1,4 +1,4 @@
-package sandbox3
+package maps
 
 import (
 	"testing"
@@ -32,19 +32,4 @@ func TestHowToCreateDefaultstructWithMapPropNotNil(t *testing.T) {
 	// in this example I actually want a map I can add to
 	m := mappy{make(map[string]int)}
 	m.topncities["a"] = 1
-}
-
-type manager struct {
-	empno string
-	employee
-}
-
-type employee struct {
-	person
-}
-
-type person struct {
-	name          string
-	add           address
-	prevAddresses map[address]int
 }
