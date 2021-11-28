@@ -1,16 +1,14 @@
 package testshadowing
 
-import "fmt"
+// func shadowSomething() {
 
-// ShadowSomething contains some code that shadows a variable that will compile but should
-// trigger our make file which runs shadow ./... and should detect this and flag an error.
-func ShadowSomething() {
+// 	x := 10
+// 	for i := 0; i < 10; i++ {
+// 		x := i + 1
+// 		fmt.Println(i, x)
+// 	}
+// 	fmt.Println(x)
+// }
 
-	x := 10
-	fmt.Println("x is", x)
-	for i := 0; i < 10; i++ {
-		// shadow x below
-		x := i + 1
-		fmt.Println(i, x)
-	}
-}
+// code above when uncommentd should produce the following eerror in 'errors' window in vscode.
+//declaration of "x" shadows declaration at line 9 shadow [11,3]

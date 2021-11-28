@@ -164,6 +164,14 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     # ----------------------
     indenting : workbench, tree indent. set this to max `40` depending on screen.
     change the go static check tool to go-lint. control+, search for static check.
+
+    # enable shadowing check on save
+    add the following to your settings.json
+    -
+        "gopls": {
+        "ui.diagnostic.analyses": {
+            "shadow": true
+        },
     ```
 
 -   ~/.zshrc settings
