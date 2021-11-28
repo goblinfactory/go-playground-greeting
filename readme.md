@@ -112,6 +112,10 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     -   [async spike, download files and similar to Task.WaitAll](pkg/bloggy/spikeasync.go)
     -   [BlockingCollection vs channels](pkg/concurrencypatterns/blockingcollectionvschannels.md)
 
+-   testing and test libs
+
+    -   [usinggocmp_test](pkg/gocompare/usinggocmp_test.go) : *show using go-cmp and diff to compare nested objects, also show how to exclude unexported fields.*
+
 -   net/http
     - ref ↪ [routing](https://www.honeybadger.io/blog/go-web-services/)
     -   [http REST calls to json api with json marshalling](pkg/nethttp/nethttp_test.go)

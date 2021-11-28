@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/buger/goterm v1.0.3
+	github.com/google/go-cmp v0.5.6
 	github.com/mum4k/termdash v0.16.0
 	github.com/paulbellamy/ratecounter v0.2.0
 	github.com/stretchr/testify v1.7.0
