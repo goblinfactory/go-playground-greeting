@@ -115,6 +115,8 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 -   testing and test libs
 
     -   [usinggocmp_test](pkg/gocompare/usinggocmp_test.go) : *show using go-cmp and diff to compare nested objects, also show how to exclude unexported fields.*
+    -   [within_test.go](pkg/within/within_test.go) : *comparing floats within a tolerance*
+    -   ↪ [go package go-cmp](https://mariocarrion.com/2021/01/22/go-package-equality-google-go-cmp.html) _Mario Carrion_
 
 -   net/http
     - ref ↪ [routing](https://www.honeybadger.io/blog/go-web-services/)

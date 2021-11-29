@@ -22,6 +22,7 @@ func TestHowToUseGoCmpPackage(t *testing.T) {
 	}}
 	diff := cmp.Diff(c1, c2)
 	assert.NotNil(t, diff)
+
 }
 
 // Company ...
@@ -60,3 +61,5 @@ type Cat struct {
 	age  int
 	Name string
 }
+
+// references : https://mariocarrion.com/2021/01/22/go-package-equality-google-go-cmp.html
