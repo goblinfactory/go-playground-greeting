@@ -11,6 +11,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 -   Best links : start here
 
     -   ↪ [Golang concurrency patterns (talks.golang.org)](https://talks.golang.org/2012/concurrency.slide) 
+    -   ↪ [use generics now in 1.17](https://github.com/mattn/go-generics-example) 
 
 -   Books & online resources
     -   books
@@ -124,9 +125,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     -   [spikeserver.go](pkg/nethttp2/spikeserver.go) : *minimal http 2.0 server*
     ![spikeserver.png](pkg/nethttp2/spikeserver.png)
     -   [spikeserver.go](pkg/nethttp2/serverwithmiddlewarelogging.go) : *minimal http 2.0 server with middleware and mux routing*
-    ![spikeserver.png](pkg/nethttp2/serverwithmiddlewarelogging.png)
-    
-    
+    ![spikeserver.png](pkg/nethttp2/serverwithmiddlewarelogging.png)   
 
 -   nolinq
 
