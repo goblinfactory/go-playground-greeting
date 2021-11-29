@@ -1,1 +1,1 @@
-{"id":"GAR02","name":"Gary2","born":"2000-05-01T13:01:02Z","parent-id":"but02","locations":[{"id":10,"paddock":"PortElizabeth2"},{"id":20,"paddock":"Cambridge2"}]}
+{"id":"GAR01","name":"Gary","born":"2000-05-01T13:01:02Z","parent-id":"but01","locations":[{"id":10,"paddock":"PortElizabeth"},{"id":20,"paddock":"Cambridge"}]}

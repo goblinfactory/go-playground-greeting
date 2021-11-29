@@ -21,8 +21,10 @@ func TestHowToUseGoCmpPackage(t *testing.T) {
 		{"fred", Address{2, "street2", "city3"}},
 	}}
 	diff := cmp.Diff(c1, c2)
-	assert.NotNil(t, diff)
-
+	assert.True(t, diff != "")
+	// you can't compare or assume anything about the returned text, below text is apparently deliberately randomised by the dev
+	// team to make sure you dont rely on the se values.
+	//"\u00a0\u00a0gocompare.Company{\n\u00a0\u00a0\tName: \"company1\",\n\u00a0\u00a0\tEmployees: []gocompare.Person{\n\u00a0\u00a0\t\t{Name: \"fred\", Address: {Houseno: 1, Street: \"street1\", City: \"city1\"}},\n\u00a0\u00a0\t\t{\n\u00a0\u00a0\t\t\tName: \"fred\",\n\u00a0\u00a0\t\t\tAddress: gocompare.Address{\n\u00a0\u00a0\t\t\t\tHouseno: 2,\n\u00a0\u00a0\t\t\t\tStreet:  \"street2\",\n-\u00a0\t\t\t\tCity:    \"city2\",\n+\u00a0\t\t\t\tCity:    \"city3\",\n\u00a0\u00a0\t\t\t},\n\u00a0\u00a0\t\t},\n\u00a0\u00a0\t},\n\u00a0\u00a0}\n"
 }
 
 // Company ...
@@ -44,7 +46,7 @@ type Address struct {
 	City    string
 }
 
-// cmp can't handle unexported types
+// cmp can't handle unexported type
 func TestComparingWithUnexportedFields(t *testing.T) {
 	c1 := Cat{10, "Garfield"}
 	c2 := Cat{10, "Garfield"}

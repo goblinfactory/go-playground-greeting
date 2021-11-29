@@ -3,22 +3,25 @@ package nethttp2
 import (
 	"context"
 	"fmt"
+	"log"
 	"net/http"
-	"testing"
 	"time"
 )
 
+// Handler ...
 type Handler interface {
 	ServeHTTP(http.ResponseWriter, *http.Request)
 }
 
+// ResponseWriter ...
 type ResponseWriter interface {
 	Header() http.Header
 	Write([]byte) (int, error)
 	WriteHeader(statusCode int)
 }
 
-func TestMinimalHttpServer(t *testing.T) {
+// TestMinimalHTTPServer ...
+func TestMinimalHTTPServer() {
 
 	greeter := http.NewServeMux()
 	greeter.HandleFunc("/cat", func(rw http.ResponseWriter, r *http.Request) {
@@ -50,7 +53,7 @@ func TestMinimalHttpServer(t *testing.T) {
 		fmt.Println("starting server for 20 seconds")
 		err := s.ListenAndServe()
 		if err != nil {
-			t.Error(err)
+			log.Fatal(err)
 		}
 	}()
 

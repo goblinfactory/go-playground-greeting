@@ -10,9 +10,9 @@ lint: fmt
 
 vet: fmt lint
 		go vet ./...
-		go vet -vettool=$(which shadow) ./...
 .PHONY:vet
 
 build: vet
+		go test ./...
 		go build greeting.go
 .PHONY:build
