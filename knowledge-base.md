@@ -22,3 +22,9 @@ List of strange issues I encountered that are not described in the package libs 
     - tried rebooting
     - tried inserting linefeed between codelense text and next line.
     - Only fix (workaround) was to remove it totally, settings, go, enable code lense, [ ] if true, enable code lense for running and debugging tests. <-- it's a useless setting anyway since you have the green triangle in the margin.
+
+# syscall.CLONE_NEWUTS not exist when following 'containers from scratch'
+
+When following Liz's video ↪ [containers from scratch, Liz Rice](https://www.youtube.com/watch?v=8fi7uSYlOdc) _GOTO 2018_
+
+- problem is caused by missing gopls setting, see here for fix : https://github.com/lizrice/containers-from-scratch/issues/1
