@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"testing"
 	"time"
 )
 
-func TestCreatingOurOwnHandler(t *testing.T) {
+// HTTPServerWithMiddleware ...
+func HTTPServerWithMiddleware() {
 	runFor := 21 * time.Second
 	start := time.Now()
 
