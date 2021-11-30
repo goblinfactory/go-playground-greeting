@@ -35,7 +35,6 @@ import (
 
 // visually rich demos
 var richSpikes = []func(){
-	markdown.CheckMardownLinks,
 	consolespikes.SpikeUsingkeyboardHandlers,
 	backpressure.DemoConcurrencyLimiter,
 	nethttp2.SpikeMinimalHTTPServer,
@@ -44,6 +43,8 @@ var richSpikes = []func(){
 	channels.DemoBufferedChannels,
 	bloggy.DemoCallingAPIsWithCircuitBreaker,
 	consolespikes.WhatHappensIfYouDontCloseTerminal,
+	markdown.CheckMardownLinks,
+	markdown.CheckMardownLinksVerbose,
 }
 
 var simpleSpikes = []func(){

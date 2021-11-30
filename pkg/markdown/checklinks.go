@@ -17,15 +17,24 @@ func CheckMardownLinks() {
 	CheckLinks("readme.md", false)
 }
 
+// CheckMardownLinksVerbose ...
+func CheckMardownLinksVerbose() {
+	CheckLinks("readme.md", true)
+}
+
 // CheckLinks checks that all the links in a markdown file are correct
 func CheckLinks(path string, printNonErrors bool) {
 
 	bytes, err := ioutil.ReadFile(path)
+	errcnt := 0
 	check(err)
 	links := FindLinks(bytes)
 	results := make(LinkChecks, 0)
 	for _, link := range links {
 		ok, _ := checkGoSourceFileExists(link.RelPath)
+		if !ok {
+			errcnt++
+		}
 		link := LinkCheck{link, ok}
 		if ok && printNonErrors {
 			results = append(results, link)
@@ -35,12 +44,12 @@ func CheckLinks(path string, printNonErrors bool) {
 		}
 	}
 	cnt := len(results)
-	if cnt != 0 {
+	if errcnt != 0 {
 		defer log.Fatalf("%d broken links in %s", cnt, path)
 		fmt.Println(path, ansi.Red, fmt.Sprintf("(%d) errors.", cnt), ansi.Reset)
 	}
 
-	if cnt == 0 && !printNonErrors {
+	if errcnt == 0 && !printNonErrors {
 		fmt.Println(path+" :All links", ansi.Green, " (ok)", ansi.Reset)
 		return
 	}
