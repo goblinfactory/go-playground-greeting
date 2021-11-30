@@ -21,6 +21,7 @@ import (
 	"github.com/goblinfactory/greeting/pkg/dependencyinjection"
 	"github.com/goblinfactory/greeting/pkg/errorhandling"
 	"github.com/goblinfactory/greeting/pkg/learninggo"
+	"github.com/goblinfactory/greeting/pkg/markdown"
 	"github.com/goblinfactory/greeting/pkg/muxy"
 	"github.com/goblinfactory/greeting/pkg/nethttp2"
 	"github.com/goblinfactory/greeting/pkg/nolinq"
@@ -32,10 +33,9 @@ import (
 	"github.com/goblinfactory/greeting/pkg/timing"
 )
 
-var spikes = []func(){
-
-	// visually rich demos
-	// -------------------
+// visually rich demos
+var richSpikes = []func(){
+	markdown.CheckMardownLinks,
 	consolespikes.SpikeUsingkeyboardHandlers,
 	backpressure.DemoConcurrencyLimiter,
 	nethttp2.SpikeMinimalHTTPServer,
@@ -44,13 +44,12 @@ var spikes = []func(){
 	channels.DemoBufferedChannels,
 	bloggy.DemoCallingAPIsWithCircuitBreaker,
 	consolespikes.WhatHappensIfYouDontCloseTerminal,
+}
 
-	// simple demos
-	// -----------
+var simpleSpikes = []func(){
 	nolinq.DemoQueryingObjectsAndCollectionsWithoutLinq,
 	sandbox2.DemoGatherAndProcess,
 	sandbox1.DemoRunOnce,
-
 	consolespikes.TermDashSpike4ColumnsRedGreenPrinting,
 	concurrencypatterns.DemoUsingCancelFuncToStopBackgroundGenerators,
 	errorhandling.DemoUsingErrorsAsToCheckIfAnErrorContainsAnyErrorOfSpecificType,
@@ -69,6 +68,8 @@ var spikes = []func(){
 	testwaitgroup.TestWaitGroup,
 	nethttp2.DemoServerWithLoggingMiddleware,
 }
+
+var spikes = append(richSpikes, simpleSpikes...)
 
 func main() {
 
@@ -99,7 +100,7 @@ func main() {
 
 func help() {
 	fmt.Print(ansi.Cls)
-	richDemos := 8
+	richDemos := len(richSpikes)
 	defer fmt.Print(ansi.Reset)
 	fmt.Println("Alan's Go spikes")
 	fmt.Println("Usage ./greeting {n}  //where n is one of the tests below")

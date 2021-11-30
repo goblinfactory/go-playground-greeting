@@ -1,4 +1,4 @@
-package pseudolinq
+package mylinq
 
 import (
 	"testing"

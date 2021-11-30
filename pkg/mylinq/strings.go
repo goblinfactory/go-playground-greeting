@@ -1,4 +1,4 @@
-package pseudolinq
+package mylinq
 
 // Suffix appends a suffix to each of the strings
 func (l Strings) Suffix(suffix string) []string {

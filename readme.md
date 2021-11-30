@@ -45,8 +45,8 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
 -   file IO
 
-    -   [read write text files](pkg/fileio/textio/rwbinaryfiles.go)
-    -   [read write binary files](pkg/fileio/byteio/rwtextfiles.go)
+    -   [read write binary files](pkg/fileio/byteio/rwbinaryfiles.go)
+    -   [read write text files](pkg/fileio/textio/rwtextfiles.go)
     -   [reading zip file](pkg/fileio/gzips/reading_test.go)
 
 -   json marshalling
@@ -58,7 +58,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
     -   [bufferedchannels.go](pkg/channels/bufferedchannels.go) : *example concurrently calling microservice and returning results via a buffered channel*
     ![pkg/channels/bufferedchannels](pkg/channels/bufferedchannels.png)
-    -   [channels can be constrained as read-only or write-only](pkg/concurrencypatterns/directionalchannels.go)
+    -   [channels can be constrained as read-only or write-only](pkg/concurrencypatterns/wowthisissubtle.go)
     -   [use cancel function instead of signal channel to cancel long running goroutines](pkg/concurrencypatterns/cancelfunction.go)
     -   [demo showing how deadlock can occur](pkg/concurrencypatterns/sampledeadlock.go)
     -   [for select loop pattern](pkg/concurrencypatterns/forselectloop.go)
@@ -86,7 +86,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
 -   context
 
-    -   [context with cancel example](pkg/spikequotes/bloggy.go)
+    -   [context with cancel example](pkg/bloggy/spikequotes.go)
 
 -   error handling
 
@@ -115,13 +115,13 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
 -   testing and test libs
 
-    -   [usinggocmp_test](pkg/gocompare/usinggocmp_test.go) : *show using go-cmp and diff to compare nested objects, also show how to exclude unexported fields.*
+    -   [usinggocmp_test](pkg/gocompare/usinggocmp2_test.go) : *show using go-cmp and diff to compare nested objects, also show how to exclude unexported fields.*
     -   [within_test.go](pkg/within/within_test.go) : *comparing floats within a tolerance*
     -   ↪ [go package go-cmp](https://mariocarrion.com/2021/01/22/go-package-equality-google-go-cmp.html) _Mario Carrion_
 
 -   net/http
     - ref ↪ [routing](https://www.honeybadger.io/blog/go-web-services/)
-    -   [http REST calls to json api with json marshalling](pkg/nethttp/nethttp_test.go)
+    -   [http REST calls to json api with json marshalling](pkg/nethttp2/testhttpandjsonmarshalling_integration_test.go)
     -   [spikeserver.go](pkg/nethttp2/spikeserver.go) : *minimal http 2.0 server*
     ![spikeserver.png](pkg/nethttp2/spikeserver.png)
     -   [spikeserver.go](pkg/nethttp2/serverwithmiddlewarelogging.go) : *minimal http 2.0 server with middleware and mux routing*
@@ -130,7 +130,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 -   nolinq
 
     -   [no linq](pkg/nolinq/nolinq.go) : *demonstrate basic `where`, `and`, `or` object querying without using a third party linq type library.*
-    -   [suffix](pkg/pseudolinq/suffix_test.go) : *test showing a custom linq like extension `mystrings.Suffix('.txt')` adding a `.txt` suffix to an array of strings*
+    -   [suffix](pkg/mylinq/suffix_test.go) : *test showing a custom linq like extension `mystrings.Suffix('.txt')` adding a `.txt` suffix to an array of strings*
 
 -   Software patterns
 
@@ -139,7 +139,6 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     ![spikequotes.go](pkg/bloggy/spikequotes.png)
 
 -   Patterns - backpressure
-    -   [quotes and extracts](pkg/backpressuredemo/readme.md)
     -   [quoteapi.go](pkg/bloggy/quoteapi/quoteapi.go) : *sample quote api using rate limiter return 429 if requests too fast*
     -   [concurrencylimiterdemo.go](pkg/backpressure/concurrencylimiterdemo.go) : *simple concurrency limiter demo*
     ![concurrencylimiterdemo](pkg/backpressure/concurrencylimiterdemo.png)
