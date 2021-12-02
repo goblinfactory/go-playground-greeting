@@ -28,3 +28,21 @@ List of strange issues I encountered that are not described in the package libs 
 When following Liz's video ↪ [containers from scratch, Liz Rice](https://www.youtube.com/watch?v=8fi7uSYlOdc) _GOTO 2018_
 
 - problem is caused by missing gopls setting, see here for fix : https://github.com/lizrice/containers-from-scratch/issues/1
+
+
+# No packages found for open file, underneath //go:build integration, and // +build integration
+
+When adding build tags to the top of a file, receive the error: 
+
+`No packages found for open file /Users/alanhemmings/src/go-workspace/src/github.com/goblinfactory/markdown/markdown_test.go: <nil>. If this file contains build tags, try adding "-tags=<build tag>" to your gopls "buildFlags" configuration (see (https://github.com/golang/tools/blob/master/gopls/doc/settings.md#buildflags-string). Otherwise, see the troubleshooting guidelines for help investigating (https://github.com/golang/tools/blob/master/gopls/doc/troubleshooting.md).go list`
+
+fix : add `buildFlags []string` to settings.json, as follows. (add the entire 'gopls' section, specifically `buildFlags`)
+
+```json
+{
+    "go.vetOnSave": "package",
+    "gopls": {
+        "build.buildFlags": [ "-tags"]
+    }
+}
+```

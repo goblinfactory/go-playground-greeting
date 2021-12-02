@@ -1,3 +1,6 @@
 {
-    "go.vetOnSave": "package"
+    "go.vetOnSave": "package",
+    "gopls": {
+        "build.buildFlags": [ "-tags=integration"]
+    }
 }

@@ -68,6 +68,7 @@ var simpleSpikes = []func(){
 	testvet.TestThatVetRunsOnSave,
 	testwaitgroup.TestWaitGroup,
 	nethttp2.DemoServerWithLoggingMiddleware,
+	ansi.PrintColors,
 }
 
 var spikes = append(richSpikes, simpleSpikes...)
