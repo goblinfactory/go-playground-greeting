@@ -22,6 +22,9 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
     -   websites
         -   ↪ https://golangbyexample.com/
 
+-   Articles on best practices
+    - ↪ [CLI how to and advice](https://blog.carlmjohnson.net/post/2020/go-cli-how-to-and-advice/) 
+
 # shortcuts to spikes
 
 -   basic types, enums, datetime

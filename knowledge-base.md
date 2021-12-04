@@ -46,3 +46,37 @@ fix : add `buildFlags []string` to settings.json, as follows. (add the entire 'g
     }
 }
 ```
+
+# Cant debug integration tests in vscode - skipped [no tests to run]
+
+fix : use environment variables to skip or run integration tests, example
+
+```go
+
+func TestPassingNoArgsShouldExitWith1(t *testing.T) {
+	run := os.Getenv("integration")
+	if run == "" {
+		t.Skip("Set INTEGRATION to run this test.")
+	}
+	exitCode := 0
+	exit = func(ec int) { exitCode = ec }
+	os.Args = []string{}
+	main()
+	assert.Equal(t, exitCode, 1)
+}
+```
+also, set the environment variables in `settings.json`
+
+```json
+{
+    "go.vetOnSave": "package",
+    "go.testEnvVars": {
+        "integration": "yes"
+    },
+    "gopls": {
+       "build.buildFlags": [ "-tags=integration"]
+    },
+}
+```
+
+- see more :  https://peter.bourgon.org/blog/2021/04/02/dont-use-build-tags-for-integration-tests.html
