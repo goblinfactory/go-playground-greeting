@@ -12,6 +12,8 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
 
     -   ↪ [Golang concurrency patterns (talks.golang.org)](https://talks.golang.org/2012/concurrency.slide) 
     -   ↪ [use generics now in 1.17](https://github.com/mattn/go-generics-example) 
+    -   ↪ [publishing Go CLI apps to your personal Brew Tap using GoReleaser](https://appliedgo.net/release2/)
+            - my own example here [gf-markdown](https://github.com/goblinfactory/gf-markdown)
 
 -   Books & online resources
     -   books
@@ -23,7 +25,7 @@ Please take any code samples here with a huge pinch of salt. I'm writing these a
         -   ↪ https://golangbyexample.com/
 
 -   Articles on best practices
-    - ↪ [CLI how to and advice](https://blog.carlmjohnson.net/post/2020/go-cli-how-to-and-advice/) 
+    - ↪ [CLI how to and advice](https://blog.carlmjohnson.net/post/2020/go-cli-how-to-and-advice/) : *(AH) Nice opinionated article with good references, enough to get you started and make you think about CLI's*
 
 # shortcuts to spikes
 
